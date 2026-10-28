@@ -45,11 +45,13 @@ function Form() {
   const [errors, setErrors] = useState<FieldError[]>([]);
   const [toast, setToast] = useState("");
   const [ready, setReady] = useState(false);
+  const [loadFailed, setLoadFailed] = useState(false);
   const editable =
     !inspection || ["DRAFT", "RECHECK"].includes(inspection.status);
   useEffect(() => {
     let active = true;
     setReady(false);
+    setLoadFailed(false);
     setErrors([]);
     Promise.all([
       request<Vehicle[]>("/vehicles"),
@@ -78,7 +80,7 @@ function Form() {
         setReady(true);
       })
       .catch((e) => {
-        if (active) setToast(e.message);
+        if (active) { setToast(e.message); setLoadFailed(true); }
       });
     return () => {
       active = false;
@@ -196,7 +198,10 @@ function Form() {
           </div>
         )}
         {!ready ? (
-          <p role="status">Memuat data inspeksi…</p>
+          loadFailed ? <div className="card">
+            <p>Data inspeksi belum dapat dimuat. Periksa koneksi lalu coba kembali.</p>
+            <button onClick={() => window.location.reload()}>Coba lagi</button>
+          </div> : <p role="status">Memuat data inspeksi…</p>
         ) : (
           <>
             <section className="card">

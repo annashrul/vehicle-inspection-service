@@ -93,3 +93,16 @@ test("shows API field errors without losing form", async ({ page }) => {
   await expect(page.getByRole("status")).toContainText("Validation failed");
   await expect(page.getByLabel("Nama inspektur")).toHaveValue("API errors");
 });
+
+test("initial API failure offers a working retry", async ({ page }) => {
+  await page.route("**/api/v1/vehicles", route => route.fulfill({
+    status: 503, contentType: "application/json",
+    body: JSON.stringify({ success: false, message: "Service unavailable", errors: [] }),
+  }));
+  await page.goto("/inspections/new");
+  await expect(page.getByRole("button", { name: "Coba lagi" })).toBeVisible();
+  await expect(page.getByText("Memuat data inspeksi…")).toHaveCount(0);
+  await page.unroute("**/api/v1/vehicles");
+  await page.getByRole("button", { name: "Coba lagi" }).click();
+  await expect(page.getByLabel("Nama inspektur")).toBeVisible();
+});
