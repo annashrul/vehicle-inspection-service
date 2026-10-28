@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.logique.inspection.ContractTest
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 66.45 s -- in com.logique.inspection.ContractTest

@@ -1,0 +1,70 @@
+
+Running 3 tests using 1 worker
+
+(node:25067) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/inspection.spec.ts:3:3 › form integration at 1280px (7.4s)
+(node:25412) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/inspection.spec.ts:3:3 › form integration at 768px (9.2s)
+(node:25669) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 tests/inspection.spec.ts:35:1 › shows API field errors without losing form (1.6s)
+
+
+  1) tests/inspection.spec.ts:3:3 › form integration at 1280px ─────────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByLabel('Nama inspektur')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByLabel('Nama inspektur') with timeout 5000ms
+      - waiting for getByLabel('Nama inspektur')
+
+
+      4 |     await page.setViewportSize({ width, height: 900 });
+      5 |     await page.goto('/inspections/new');
+    > 6 |     await expect(page.getByLabel('Nama inspektur')).toBeVisible();
+        |                                                     ^
+      7 |     await expect(page.getByLabel('Kendaraan', { exact: true }).locator('option')).toHaveCount(20);
+      8 |     await page.getByRole('button', { name: 'Simpan Draft' }).click();
+      9 |     await expect(page.getByText('Nama inspektur wajib diisi.')).toBeVisible();
+        at /home/elqantara/Projects/logique-technical-test/frontend/tests/inspection.spec.ts:6:53
+
+    Error Context: test-results/inspection-form-integration-at-1280px/error-context.md
+
+  2) tests/inspection.spec.ts:3:3 › form integration at 768px ──────────────────────────────────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByLabel('Kendaraan', { exact: true }).locator('option')
+    Expected: 20
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" getByLabel('Kendaraan', { exact: true }).locator('option') with timeout 5000ms
+      - waiting for getByLabel('Kendaraan', { exact: true }).locator('option')
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+       5 |     await page.goto('/inspections/new');
+       6 |     await expect(page.getByLabel('Nama inspektur')).toBeVisible();
+    >  7 |     await expect(page.getByLabel('Kendaraan', { exact: true }).locator('option')).toHaveCount(20);
+         |                                                                                   ^
+       8 |     await page.getByRole('button', { name: 'Simpan Draft' }).click();
+       9 |     await expect(page.getByText('Nama inspektur wajib diisi.')).toBeVisible();
+      10 |     await page.getByLabel('Nama inspektur').fill(`Browser test ${width}`);
+        at /home/elqantara/Projects/logique-technical-test/frontend/tests/inspection.spec.ts:7:83
+
+    Error Context: test-results/inspection-form-integration-at-768px/error-context.md
+
+  2 failed
+    tests/inspection.spec.ts:3:3 › form integration at 1280px ──────────────────────────────────────
+    tests/inspection.spec.ts:3:3 › form integration at 768px ───────────────────────────────────────
+  1 passed (28.7s)

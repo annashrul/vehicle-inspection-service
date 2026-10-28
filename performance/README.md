@@ -5,7 +5,7 @@ Endpoint yang diukur:
 - `/api/v1/inspections?status=SUBMITTED&limit=20&page=1`
 - `/api/v1/inspections?status=SUBMITTED&limit=20&page=2000`
 
-`python3 scripts/benchmark.py before|after` menjalankan 5 warmup dan 30 request serial pada setiap endpoint. Latensi mencakup HTTP lokal, count, pemilihan ID, fetch item dan serialisasi respons. Median dan p95 dilaporkan; nilai mentah disimpan di JSON. EXPLAIN ANALYZE BUFFERS dijalankan terpisah untuk query pemilihan ID dan count, sehingga durasinya bukan durasi seluruh endpoint.
+`python3 scripts/benchmark.py before|after` menjalankan 5 warmup dan 30 request serial pada setiap endpoint. Latensi mencakup HTTP lokal, count, pemilihan ID, fetch item dan serialisasi respons. Median dan p95 dilaporkan (p95 memakai lower quantile, indeks floor(0,95 × (n−1))); nilai mentah disimpan di JSON. EXPLAIN ANALYZE BUFFERS dijalankan terpisah untuk query pemilihan ID dan count, sehingga durasinya bukan durasi seluruh endpoint.
 
 Baseline memakai hanya primary key/unique pada tabel bisnis. Index otomatis pada tabel metadata Flyway tidak digunakan query inspeksi. Seluruh 50.000 inspeksi seed dimasukkan lewat skrip asli E7; baris browser test yang sudah ada tetap dipertahankan dan total aktual dicatat di JSON/SQL.
 

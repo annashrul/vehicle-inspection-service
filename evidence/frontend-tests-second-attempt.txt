@@ -1,0 +1,68 @@
+
+Running 3 tests using 1 worker
+
+(node:26561) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/inspection.spec.ts:9:3 › form integration at 1280px (8.6s)
+(node:26862) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/inspection.spec.ts:9:3 › form integration at 768px (8.1s)
+(node:27150) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 tests/inspection.spec.ts:41:1 › shows API field errors without losing form (2.4s)
+
+
+  1) tests/inspection.spec.ts:9:3 › form integration at 1280px ─────────────────────────────────────
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('Kondisi Mesin menyala', { exact: true })
+    Expected: "NOT_INSPECTABLE"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" getByLabel('Kondisi Mesin menyala', { exact: true }) with timeout 5000ms
+      - waiting for getByLabel('Kondisi Mesin menyala', { exact: true })
+
+
+      16 |     await page.getByLabel('Nama inspektur').fill(`Browser test ${width}`);
+      17 |     await page.getByLabel('Kunci kendaraan tersedia').uncheck();
+    > 18 |     await expect(page.getByLabel('Kondisi Mesin menyala', { exact: true })).toHaveValue('NOT_INSPECTABLE');
+         |                                                                             ^
+      19 |     await expect(page.getByLabel('Kondisi Ruang mesin', { exact: true })).toBeDisabled();
+      20 |     await page.getByLabel('Kondisi Depan', { exact: true }).selectOption('MAJOR_DAMAGE');
+      21 |     await page.getByRole('button', { name: 'Simpan Draft' }).click();
+        at /home/elqantara/Projects/logique-technical-test/frontend/tests/inspection.spec.ts:18:77
+
+    Error Context: test-results/inspection-form-integration-at-1280px/error-context.md
+
+  2) tests/inspection.spec.ts:9:3 › form integration at 768px ──────────────────────────────────────
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('Kondisi Mesin menyala', { exact: true })
+    Expected: "NOT_INSPECTABLE"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" getByLabel('Kondisi Mesin menyala', { exact: true }) with timeout 5000ms
+      - waiting for getByLabel('Kondisi Mesin menyala', { exact: true })
+
+
+      16 |     await page.getByLabel('Nama inspektur').fill(`Browser test ${width}`);
+      17 |     await page.getByLabel('Kunci kendaraan tersedia').uncheck();
+    > 18 |     await expect(page.getByLabel('Kondisi Mesin menyala', { exact: true })).toHaveValue('NOT_INSPECTABLE');
+         |                                                                             ^
+      19 |     await expect(page.getByLabel('Kondisi Ruang mesin', { exact: true })).toBeDisabled();
+      20 |     await page.getByLabel('Kondisi Depan', { exact: true }).selectOption('MAJOR_DAMAGE');
+      21 |     await page.getByRole('button', { name: 'Simpan Draft' }).click();
+        at /home/elqantara/Projects/logique-technical-test/frontend/tests/inspection.spec.ts:18:77
+
+    Error Context: test-results/inspection-form-integration-at-768px/error-context.md
+
+  2 failed
+    tests/inspection.spec.ts:9:3 › form integration at 1280px ──────────────────────────────────────
+    tests/inspection.spec.ts:9:3 › form integration at 768px ───────────────────────────────────────
+  1 passed (31.8s)

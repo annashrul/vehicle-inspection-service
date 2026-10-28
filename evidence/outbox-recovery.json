@@ -1,0 +1,56 @@
+{
+  "readiness_during_outage": {
+    "status": "DOWN",
+    "checks": [
+      {
+        "name": "Database connections health check",
+        "status": "UP",
+        "data": {
+          "<default>": "UP"
+        }
+      },
+      {
+        "name": "MongoDB connection health check",
+        "status": "DOWN",
+        "data": {
+          "<default>": "KO, reason: null"
+        }
+      }
+    ]
+  },
+  "during_outage": {
+    "success": true,
+    "message": "Batch processed successfully",
+    "data": {
+      "results": [
+        {
+          "result": "CREATED",
+          "errors": [],
+          "client_id": "18793d7a-95ce-4301-8f9d-f889071132ff",
+          "inspection_id": 50008,
+          "server_version": 1
+        }
+      ]
+    }
+  },
+  "pending_during_outage": 1,
+  "after_recovery": {
+    "success": true,
+    "message": "Audit retrieved successfully",
+    "data": [
+      {
+        "action": "SYNC_CREATED",
+        "actor": "outage-test",
+        "at": "2026-10-28T08:36:54.636528064Z",
+        "from_status": null,
+        "inspection_id": 50008,
+        "meta": {
+          "base_version": null,
+          "client_id": "18793d7a-95ce-4301-8f9d-f889071132ff",
+          "errors": []
+        },
+        "to_status": "DRAFT"
+      }
+    ]
+  }
+}
