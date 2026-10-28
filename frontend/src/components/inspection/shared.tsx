@@ -112,6 +112,7 @@ export function StatusBadge({ status = "DRAFT" }: { status?: Status }) {
       variant="outline"
       className={cn("status-badge", style)}
       data-testid="inspection-status"
+      data-status={status}
     >
       {status === "APPROVED" ? (
         <Check aria-hidden />
@@ -121,7 +122,6 @@ export function StatusBadge({ status = "DRAFT" }: { status?: Status }) {
         <span className="size-1.5 rounded-full bg-current" aria-hidden />
       )}
       {label}
-      <span className="sr-only">{status}</span>
     </Badge>
   );
 }

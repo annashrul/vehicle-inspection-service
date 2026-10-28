@@ -198,7 +198,6 @@ export function InspectionItemCard({
           name={conditionName}
           render={({ field }) => (
             <RadioGroup
-              tabIndex={-1}
               {...conditionA11y}
               aria-label={`Kondisi ${point.label}`}
               ref={(node) => {

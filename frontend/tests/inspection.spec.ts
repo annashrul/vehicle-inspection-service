@@ -189,7 +189,10 @@ test("integrasi backend E2/E3/E6: draft parsial, foto, submit dan detail read-on
   await page
     .getByRole("button", { name: "Ya, ajukan inspeksi", exact: true })
     .click();
-  await expect(page.locator(".heading-meta")).toContainText("SUBMITTED");
+  await expect(page.locator(".heading-meta [data-status]")).toHaveAttribute(
+    "data-status",
+    "SUBMITTED",
+  );
   await expect(page.locator(".heading-meta")).toContainText("Versi 4");
   expect(writes.map((w) => w.method)).toEqual(["POST", "PUT", "PUT", "POST"]);
   expect(writes[0].body.items).toHaveLength(1);
@@ -215,7 +218,10 @@ test("integrasi backend E2/E3/E6: draft parsial, foto, submit dan detail read-on
   );
   expect(response.status()).toBe(200);
   await page.reload();
-  await expect(page.locator(".heading-meta")).toContainText("APPROVED");
+  await expect(page.locator(".heading-meta [data-status]")).toHaveAttribute(
+    "data-status",
+    "APPROVED",
+  );
   await expect(
     page.getByRole("button", { name: "Submit", exact: true }),
   ).toBeDisabled();
@@ -287,13 +293,22 @@ test("keyboard dapat mencapai Select, Switch dan RadioGroup", async ({
   await page.keyboard.press("Enter");
   await expect(select).not.toContainText("Pilih kendaraan");
   const key = page.getByRole("switch", { name: "Kunci kendaraan tersedia" });
-  await key.focus();
+  await page
+    .getByRole("textbox", { name: "Nama inspektur", exact: true })
+    .focus();
+  await page.keyboard.press("Tab");
+  await expect(key).toBeFocused();
   await page.keyboard.press("Space");
   await expect(key).toHaveAttribute("aria-checked", "false");
   const radio = page
     .getByRole("radiogroup", { name: "Kondisi Depan", exact: true })
     .getByRole("radio", { name: "Baik", exact: true });
-  await radio.focus();
+  await page.keyboard.press("Tab");
+  await expect(
+    page.getByRole("button", { name: "Bagian Eksterior", exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(radio).toBeFocused();
   await page.keyboard.press("Space");
   await expect(radio).toBeChecked();
 });
@@ -373,4 +388,27 @@ test("400 backend membuka Accordion dan memfokuskan error pertama secara visual"
   await expect(
     page.getByRole("textbox", { name: "Catatan Ruang mesin", exact: true }),
   ).toBeFocused();
+});
+
+test("action bar memberi ruang ketika visual viewport menyempit untuk keyboard", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/inspections/new");
+  await page
+    .getByRole("textbox", { name: "Nama inspektur", exact: true })
+    .focus();
+  await page.evaluate(() => {
+    Object.defineProperty(window.visualViewport!, "height", {
+      configurable: true,
+      get: () => window.innerHeight - 280,
+    });
+    window.visualViewport!.dispatchEvent(new Event("resize"));
+  });
+  await expect(page.getByTestId("action-bar")).not.toBeVisible();
+  await page.evaluate(() => {
+    Reflect.deleteProperty(window.visualViewport!, "height");
+    window.visualViewport!.dispatchEvent(new Event("resize"));
+  });
+  await expect(page.getByTestId("action-bar")).toBeVisible();
 });

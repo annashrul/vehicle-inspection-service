@@ -52,8 +52,16 @@ function SectionHeading({ section }: { section: Section }) {
         <span>{indices.length} titik pemeriksaan</span>
       </span>
       <span
+        id={`section-status-${section}`}
         className={`section-count ${hasError ? "text-destructive" : valid === indices.length ? "text-primary" : ""}`}
       >
+        <span className="sr-only">
+          {hasError
+            ? "Ada kolom yang perlu diperbaiki. "
+            : valid === indices.length
+              ? "Bagian lengkap. "
+              : ""}
+        </span>
         {hasError ? (
           <CircleAlert aria-hidden />
         ) : valid === indices.length ? (
@@ -123,6 +131,7 @@ export function ChecklistAccordion({
             <AccordionTrigger
               className="section-trigger"
               aria-label={`Bagian ${SECTION_LABELS[section]}`}
+              aria-describedby={`section-status-${section}`}
             >
               <SectionHeading section={section} />
             </AccordionTrigger>
