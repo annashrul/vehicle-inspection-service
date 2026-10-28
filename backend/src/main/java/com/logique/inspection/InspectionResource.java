@@ -12,12 +12,6 @@ import org.eclipse.microprofile.openapi.annotations.media.*;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 
-@APIResponses({
-    @APIResponse(responseCode="400",description="Invalid request or business validation",content=@Content(schema=@Schema(implementation=ErrorBody.class))),
-    @APIResponse(responseCode="404",description="Vehicle or inspection not found",content=@Content(schema=@Schema(implementation=ErrorBody.class))),
-    @APIResponse(responseCode="409",description="Version conflict or illegal transition",content=@Content(schema=@Schema(implementation=ErrorBody.class))),
-    @APIResponse(responseCode="500",description="Unexpected infrastructure failure",content=@Content(schema=@Schema(implementation=ErrorBody.class)))
-})
 @Path("/api/v1") @Produces(MediaType.APPLICATION_JSON) @Consumes(MediaType.APPLICATION_JSON)
 public class InspectionResource {
     @Inject InspectionService service;

@@ -110,4 +110,18 @@ class ContractTest {
             assertEquals(5,Collections.frequency(results,"DUPLICATE"));
         } finally { pool.shutdownNow(); }
     }
+    @Test void allOpenApiReferencesResolve() throws Exception {
+        var spec=mapper.readTree(given().queryParam("format","json").get("/q/openapi").then().statusCode(200).extract().asString());
+        verifyReferences(spec,spec);
+        assertTrue(spec.path("paths").path("/api/v1/inspections").path("get").path("responses").has("200"));
+        assertTrue(spec.path("components").path("schemas").has("Detail"));
+    }
+    void verifyReferences(com.fasterxml.jackson.databind.JsonNode node,com.fasterxml.jackson.databind.JsonNode root) {
+        if (node.has("$ref")) {
+            String ref=node.path("$ref").asText();
+            assertTrue(ref.startsWith("#/"),ref);
+            assertFalse(root.at(ref.substring(1)).isMissingNode(),"Unresolved OpenAPI reference: "+ref);
+        }
+        if (node.isContainerNode()) for (var child:node) verifyReferences(child,root);
+    }
 }
