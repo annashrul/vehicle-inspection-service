@@ -1,0 +1,18 @@
+#!/bin/sh
+# Pinned Maven bootstrap. Uses installed Maven when available; otherwise downloads 3.9.9.
+set -eu
+if command -v mvn >/dev/null 2>&1; then exec mvn "$@"; fi
+MAVEN_VERSION=3.9.9
+MAVEN_DIR="${MAVEN_USER_HOME:-$HOME/.m2}/wrapper/apache-maven-$MAVEN_VERSION"
+if [ ! -x "$MAVEN_DIR/bin/mvn" ]; then
+  command -v java >/dev/null 2>&1 || { echo 'Java 21 is required (or run with the Docker build image).' >&2; exit 1; }
+  mkdir -p "$(dirname "$MAVEN_DIR")"
+  work=$(mktemp -d)
+  trap 'rm -rf "$work"' EXIT HUP INT TERM
+  url="https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/$MAVEN_VERSION/apache-maven-$MAVEN_VERSION-bin.tar.gz"
+  curl -fsSL "$url" -o "$work/maven.tar.gz"
+  curl -fsSL "$url.sha512" -o "$work/maven.sha512"
+  printf '%s  %s\n' "$(cat "$work/maven.sha512")" "$work/maven.tar.gz" | sha512sum -c -
+  tar -xzf "$work/maven.tar.gz" -C "$(dirname "$MAVEN_DIR")"
+fi
+exec "$MAVEN_DIR/bin/mvn" "$@"
