@@ -16,6 +16,14 @@ public class AuditService {
     @Inject EntityManager em;
     @Inject MongoClient mongo;
     @ConfigProperty(name="quarkus.mongodb.database") String database;
+    private boolean indexReady;
+    private synchronized void ensureIndex() {
+        if (!indexReady) {
+            mongo.getDatabase(database).getCollection("audit").createIndex(
+                new Document("inspection_id",1).append("at",1).append("_id",1));
+            indexReady=true;
+        }
+    }
 
     @Transactional(Transactional.TxType.MANDATORY)
     public void record(Long id, String action, String from, String to, String actor, Map<String,Object> meta) {
@@ -30,6 +38,7 @@ public class AuditService {
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     public void deliverFor(long id) { deliverPending(id); }
     private void deliverPending(Long id) {
+        ensureIndex();
         // History waits on a dispatcher lock so it can read all committed events for this inspection.
         var query=em.createNativeQuery("select * from audit_outbox where delivered_at is null" + (id==null ? "" : " and inspection_id = :id") + " order by created_at, id" + (id==null ? " limit 500" : "") + " for update",AuditEvent.class);
         if (id!=null) query.setParameter("id",id);

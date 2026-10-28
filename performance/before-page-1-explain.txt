@@ -1,0 +1,32 @@
+                                                          QUERY PLAN                                                          
+------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=2435.92..2435.97 rows=20 width=16) (actual time=23.198..23.202 rows=20 loops=1)
+   Buffers: shared hit=617
+   ->  Sort  (cost=2435.92..2548.64 rows=45090 width=16) (actual time=23.196..23.198 rows=20 loops=1)
+         Sort Key: updated_at DESC, id DESC
+         Sort Method: top-N heapsort  Memory: 26kB
+         Buffers: shared hit=617
+         ->  Seq Scan on inspections  (cost=0.00..1236.09 rows=45090 width=16) (actual time=0.008..14.598 rows=45076 loops=1)
+               Filter: ((status)::text = 'SUBMITTED'::text)
+               Rows Removed by Filter: 4931
+               Buffers: shared hit=611
+ Planning:
+   Buffers: shared hit=112
+ Planning Time: 1.133 ms
+ Execution Time: 23.243 ms
+(14 rows)
+
+                                                      QUERY PLAN                                                      
+----------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=1348.81..1348.82 rows=1 width=8) (actual time=12.320..12.321 rows=1 loops=1)
+   Buffers: shared hit=611
+   ->  Seq Scan on inspections  (cost=0.00..1236.09 rows=45090 width=0) (actual time=0.007..9.530 rows=45076 loops=1)
+         Filter: ((status)::text = 'SUBMITTED'::text)
+         Rows Removed by Filter: 4931
+         Buffers: shared hit=611
+ Planning:
+   Buffers: shared hit=3
+ Planning Time: 0.108 ms
+ Execution Time: 12.348 ms
+(10 rows)
+
