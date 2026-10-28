@@ -94,7 +94,7 @@ Sebelum/sesudah memakai container, image, waktu startup, database dan JVM yang s
 
 - Seluruh E1–E8, R1–R7, S1–S5 telah diimplementasikan dan diverifikasi. Maven final: 10 tes lulus; browser: 4 tes lulus; build frontend berhasil.
 - Simulasi MongoDB berhenti membuktikan readiness 503/DOWN, sync tetap CREATED dengan 1 outbox pending, dan audit muncul sekali setelah pemulihan. PostgreSQL/MongoDB kembali UP.
-- State akhir: 50.010 inspeksi, 700.126 item, 50.010 event audit PostgreSQL dan MongoDB, 50.000 audit seed-script, outbox pending 0. Data tambahan pengujian dipertahankan.
+- Snapshot akhir sesi backend sebelum redesign: 50.010 inspeksi, 700.126 item, 50.010 event audit PostgreSQL dan MongoDB, 50.000 audit seed-script, outbox pending 0. Data tambahan pengujian dipertahankan.
 - Tail latency halaman 2000 belum membaik; keyset dan optimasi exact count belum dikerjakan.
 - Nama lengkap kandidat dan total jam pengerjaan sebelum sesi lanjutan tidak disediakan; identitas Git dipakai tanpa mengarang data.
 - Bonus tidak dikerjakan. Autentikasi, TLS deployment dan kebijakan retensi outbox tidak termasuk lingkup technical test ini.
@@ -106,3 +106,12 @@ Sebelum/sesudah memakai container, image, waktu startup, database dan JVM yang s
 - Bantuan AI: implementasi backend/frontend, tes, troubleshooting Docker, seed/benchmark dan dokumentasi sesi ini.
 - Bagian ditulis sendiri oleh kandidat: tidak diklaim untuk hasil generasi sesi ini; kandidat perlu melakukan review dan memahami keputusan desain.
 - Contoh kesalahan AI: parsing otomatis query parameter ternyata menghasilkan 404 untuk page nonnumerik, terungkap oleh tes yang mengharapkan 400. Parsing eksplisit ditambahkan, lalu tes dijalankan ulang; schema OpenAPI juga diperiksa karena konfigurasi JSON runtime tidak otomatis menjamin nama schema snake_case.
+
+
+## Pembaruan frontend setelah submission awal
+
+Redesign berada pada branch main; tag v1.0-submission dipertahankan sebagai snapshot awal. Backend, hasil seed dan benchmark di atas tidak diubah atau diuji ulang untuk mengklaim angka baru. Pengujian integrasi frontend memakai inspeksi sintetis baru dan mempertahankan seluruh data yang sudah ada.
+
+Frontend baru: RHF/Zod, shadcn/ui/Tailwind/Lucide, Accordion multi-open, partial draft, progress valid, navigasi/fokus error, conflict/read-only/error recovery, desktop/tablet/mobile dan PWA shell dengan update terkonfirmasi. Draft lokal IndexedDB/E7 offline belum diaktifkan; alasan dan batas keamanan/konsistensi dijelaskan pada [FRONTEND_REDESIGN.md](FRONTEND_REDESIGN.md).
+
+Verifikasi terbaru: build dan lint berhasil, 20 tes unit, 16 tes browser pada 10 viewport, dan 5 tes PWA lulus. Bukti berada di [evidence/redesign](evidence/redesign/README.md). Pengujian perangkat fisik, browser selain Chromium dan instalasi OS belum dilakukan. Audit runtime bersih; 4 temuan low pada dependency build masih dicatat secara eksplisit.

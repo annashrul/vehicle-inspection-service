@@ -1,0 +1,27 @@
+
+> logique-inspection@1.0.0 test:e2e
+> playwright test
+
+
+Running 16 tests using 1 worker
+
+(node:203104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/inspection.spec.ts:49:3 › adaptif 320px: layout, partial draft, focus Accordion dan overflow (3.1s)
+  ✓   2 tests/inspection.spec.ts:49:3 › adaptif 375px: layout, partial draft, focus Accordion dan overflow (2.8s)
+  ✓   3 tests/inspection.spec.ts:49:3 › adaptif 390px: layout, partial draft, focus Accordion dan overflow (2.7s)
+  ✓   4 tests/inspection.spec.ts:49:3 › adaptif 430px: layout, partial draft, focus Accordion dan overflow (2.9s)
+  ✓   5 tests/inspection.spec.ts:49:3 › adaptif 768px: layout, partial draft, focus Accordion dan overflow (3.0s)
+  ✓   6 tests/inspection.spec.ts:49:3 › adaptif 820px: layout, partial draft, focus Accordion dan overflow (3.1s)
+  ✓   7 tests/inspection.spec.ts:49:3 › adaptif 1024px: layout, partial draft, focus Accordion dan overflow (3.0s)
+  ✓   8 tests/inspection.spec.ts:49:3 › adaptif 1280px: layout, partial draft, focus Accordion dan overflow (3.2s)
+  ✓   9 tests/inspection.spec.ts:49:3 › adaptif 1440px: layout, partial draft, focus Accordion dan overflow (3.1s)
+  ✓  10 tests/inspection.spec.ts:49:3 › adaptif 1920px: layout, partial draft, focus Accordion dan overflow (3.1s)
+  ✓  11 tests/inspection.spec.ts:126:1 › integrasi backend E2/E3/E6: draft parsial, foto, submit dan detail read-only (9.2s)
+  ✓  12 tests/inspection.spec.ts:229:1 › 409 menjaga input dan memuat data terbaru hanya setelah konfirmasi (2.3s)
+  ✓  13 tests/inspection.spec.ts:285:1 › keyboard dapat mencapai Select, Switch dan RadioGroup (1.6s)
+  ✓  14 tests/inspection.spec.ts:322:3 › interaksi sentuh › Switch dan pilihan kondisi dapat digunakan dengan sentuhan (1.0s)
+  ✓  15 tests/inspection.spec.ts:344:1 › 400 backend membuka Accordion dan memfokuskan error pertama secara visual (1.9s)
+  ✓  16 tests/inspection.spec.ts:393:1 › action bar memberi ruang ketika visual viewport menyempit untuk keyboard (779ms)
+
+  16 passed (48.7s)

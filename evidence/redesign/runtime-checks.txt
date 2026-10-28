@@ -1,0 +1,38 @@
+{
+    "status": "UP",
+    "checks": [
+        {
+            "name": "MongoDB connection health check",
+            "status": "UP",
+            "data": {
+                "<default>": "OK"
+            }
+        },
+        {
+            "name": "Database connections health check",
+            "status": "UP",
+            "data": {
+                "<default>": "UP"
+            }
+        }
+    ]
+}NAME                                IMAGE                            COMMAND                  SERVICE    CREATED             STATUS                 PORTS
+logique-technical-test-backend-1    logique-technical-test-backend   "java -jar quarkus-r…"   backend    About an hour ago   Up About an hour       0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+logique-technical-test-mongo-1      mongo:7                          "docker-entrypoint.s…"   mongo      2 hours ago         Up 2 hours (healthy)   127.0.0.1:27017->27017/tcp
+logique-technical-test-postgres-1   postgres:16-alpine               "docker-entrypoint.s…"   postgres   2 hours ago         Up 2 hours (healthy)   127.0.0.1:5432->5432/tcp
+ inspections 
+-------------
+       50019
+(1 row)
+
+ pending_audit 
+---------------
+             0
+(1 row)
+
+{
+  ping: {
+    ok: 1
+  },
+  preserved_seed_audits: 50000
+}

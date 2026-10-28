@@ -15,3 +15,16 @@ frontend/test-results/
 frontend/playwright-report/
 evidence/test-reports/*.xml
 evidence/test-reports/*.dump*
+# Preserve local redesign diagnostics; commit only final verification artifacts.
+evidence/redesign/*
+!evidence/redesign/README.md
+!evidence/redesign/viewport-*.png
+!evidence/redesign/*-tests.json
+!evidence/redesign/npm-audit*.json
+!evidence/redesign/pwa-manifest.json
+!evidence/redesign/icons.json
+!evidence/redesign/backend-unchanged.json
+!evidence/redesign/runtime-checks.txt
+!evidence/redesign/dependencies.txt
+!evidence/redesign/changed-files.txt
+!evidence/redesign/git-commits.txt

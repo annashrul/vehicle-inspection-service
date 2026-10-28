@@ -1,0 +1,16 @@
+
+> logique-inspection@1.0.0 test:pwa
+> PWA_TEST=1 playwright test pwa.spec.ts
+
+
+Running 5 tests using 1 worker
+
+(node:204323) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/pwa.spec.ts:17:1 › manifest, ikon PNG aktual dan service worker aktif (1.4s)
+  ✓  2 tests/pwa.spec.ts:54:1 › offline application shell tersedia; respons dan mutasi API tidak di-cache (2.0s)
+  ✓  3 tests/pwa.spec.ts:88:1 › pembaruan nyata menunggu persetujuan dan melindungi form yang belum disimpan (4.2s)
+  ✓  4 tests/pwa.spec.ts:141:1 › form di memori tetap utuh saat offline dan tidak dikirim otomatis saat kembali online (1.3s)
+  ✓  5 tests/pwa.spec.ts:174:1 › aktivasi versi baru dari tab lain tidak menghapus perubahan tab aktif (4.7s)
+
+  5 passed (14.8s)

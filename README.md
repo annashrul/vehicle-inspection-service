@@ -86,3 +86,12 @@ Readiness memeriksa PostgreSQL dan MongoDB. Log JSON mencatat metode/path/status
 Tools: OpenAI Codex. AI membantu meninjau kontrak, melengkapi backend, frontend, tes, skrip benchmark, troubleshooting, dan dokumentasi. Tidak ada klaim bahwa bagian yang dihasilkan dalam sesi ini ditulis manual oleh kandidat; kandidat perlu meninjau dan memahami kode sebelum mengirim.
 
 Contoh koreksi: rencana awal mencatat Docker tidak dapat diakses dan Git tidak tersedia. Pemeriksaan nyata pada lingkungan baru membuktikan daemon dapat diakses dan direktori `.git` kosong dapat diinisialisasi. Catatan tersebut diganti berdasarkan hasil command, dan tes/benchmark hanya diisi setelah dijalankan. Pemeriksaan OpenAPI lanjutan juga menemukan anotasi error global menutupi schema sukses dan menghasilkan referensi yang tidak terdefinisi. Error dipindahkan ke filter setelah scanning, dan tes penelusuran seluruh `$ref` ditambahkan. Perbaikan lain: input foto terkontrol yang langsung memangkas koma menghambat pengetikan banyak nama file; input diperbaiki agar teks dapat diketik sebelum daftar referensi dinormalisasi.
+
+
+## Redesign frontend (28 Oktober 2026)
+
+Frontend terbaru menggunakan React Hook Form/Zod, Tailwind 4, 17 komponen shadcn/ui, layout adaptive desktop/tablet/mobile, Accordion multi-open, progress valid dan fokus error yang membuka panel tertutup. Kondisi awal kosong dan Save Draft mendukung checklist parsial. Semua endpoint dan JSON backend dipertahankan.
+
+Laporan lengkap, struktur, 10 viewport, aksesibilitas, PWA dan batas offline: [FRONTEND_REDESIGN.md](FRONTEND_REDESIGN.md). Bukti baru dipisahkan di [evidence/redesign](evidence/redesign/README.md); bukti dan benchmark sesi awal tetap historis. Node LTS 22.12/24 atau versi yang sesuai engines diperlukan.
+
+Tes frontend terbaru: `npm run test` (Vitest/RTL), `npm run lint`, `npm run test:e2e`, dan `npm run test:pwa`. PWA memakai `npm run build` lalu `npm run preview -- --port 5173 --strictPort`, dengan backend tetap di 8080. Dev server dan preview tidak dapat memakai port 5173 bersamaan. Tidak ada IndexedDB draft atau sync E7 offline; application shell dapat dibuka offline, sedangkan data inspeksi memerlukan jaringan.

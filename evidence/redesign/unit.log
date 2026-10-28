@@ -1,0 +1,13 @@
+
+> logique-inspection@1.0.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /home/elqantara/Projects/logique-technical-test/frontend
+
+
+ Test Files  2 passed (2)
+      Tests  20 passed (20)
+   Start at  17:04:40
+   Duration  22.58s (tests 89%, environment 5%, import 3%, setup 2%, transform 1%)
+

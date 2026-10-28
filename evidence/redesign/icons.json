@@ -1,0 +1,20 @@
+[
+  {
+    "file": "frontend/public/icons/icon-192.png",
+    "width": 192,
+    "height": 192,
+    "sha256": "ce7ae5c1d39c1a9c1c353c5742be21479c8d935e27b77411100503e7936ef48d"
+  },
+  {
+    "file": "frontend/public/icons/icon-512.png",
+    "width": 512,
+    "height": 512,
+    "sha256": "34e33f87a4378422d85700d8add2706c963f0cc7766ca17cc0d48c58f3632b6e"
+  },
+  {
+    "file": "frontend/public/icons/icon-maskable-512.png",
+    "width": 512,
+    "height": 512,
+    "sha256": "793d7aac78cb288e857b39ccf0966c4237e22d86f866bb6d1bf6a4b9232c0712"
+  }
+]

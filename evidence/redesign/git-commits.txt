@@ -1,0 +1,5 @@
+Commit implementasi; commit dokumentasi yang memuat berkas ini dapat dilihat melalui git log main.
+
+ea20b72 feat: add safe installable PWA shell and confirmed cross-tab updates
+315763f fix: preserve native keyboard navigation and accessible checklist status
+f52a871 feat: redesign adaptive inspection form with accessible validation

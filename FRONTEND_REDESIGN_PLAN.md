@@ -10,3 +10,12 @@ Sumber: PDF Fullstack #ASL, checklist.json, kontrak resource/service backend dan
 6. Vitest/RTL untuk aturan dan interaksi; Playwright untuk integrasi backend, keyboard, seluruh 10 viewport, serta bukti screenshot.
 7. Sesudah kebutuhan inti lulus: manifest/icons original berbasis SVG kode, service worker hanya shell/assets, prompt update. Draft IndexedDB/E7 offline ditunda secara eksplisit; tidak mengklaim autosave/sync offline.
 8. Dokumentasi hasil nyata dan commit bertahap. Tag submission sebelumnya dipertahankan.
+
+## Hasil akhir yang dieksekusi
+
+- Fondasi/komponen dan draft/submit selesai; API backend tidak diubah.
+- Native Tab/Space, fokus Accordion dan mapping error diuji, termasuk koreksi override tabIndex.
+- Build dan lint lulus; 20 tes Vitest/RTL, 16 tes browser utama, dan 5 tes PWA lulus.
+- 10 viewport diuji dan screenshot ditinjau; tidak ada horizontal overflow.
+- PWA shell/installability/update tersedia; IndexedDB/E7 offline ditunda dengan alasan konsistensi pada laporan.
+- Data/volume dipertahankan, bukti lama dipisahkan dari hasil baru di evidence/redesign.

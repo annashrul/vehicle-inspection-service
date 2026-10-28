@@ -57,3 +57,6 @@ Status: [ ] not verified; [x] executed successfully. Source implementation is tr
 
 ## Final verification (2026-10-28)
 Maven: 10 passed, 0 failures/errors/skipped; separate empty database: both migrations and 9 tests passed. Browser: 4 passed at 1280/768, including error recovery; TypeScript/Vite build passed. Original API seed: 50,000 CREATED, 0 failures, 2,218.0 seconds. Benchmark before/after and EXPLAIN are in performance/; page-2000 p95 worsened and is disclosed. Mongo outage recovery passed; final pending outbox is 0. Final documents preserve limitations and AI disclosure.
+
+## Frontend redesign follow-up
+See FRONTEND_REDESIGN_PLAN.md and FRONTEND_REDESIGN.md. Original backend, seed and performance verification above is historical and preserved. New frontend adds adaptive layouts, RHF/Zod, native keyboard navigation, mounted/layout-aware error focus and PWA application shell. Offline IndexedDB/E7 sync remains explicitly deferred; no backend contract or volumes are changed. Final frontend evidence is isolated under evidence/redesign.
