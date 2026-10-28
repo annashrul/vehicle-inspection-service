@@ -10,7 +10,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test:pwa": "PWA_TEST=1 playwright test pwa.spec.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^6.0.2",
@@ -45,6 +46,10 @@
     "typescript": "^5.7.0",
     "typescript-eslint": "^8.72.1",
     "vite": "^6.0.0",
-    "vitest": "^3.2.7"
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.0.5"
+  },
+  "engines": {
+    "node": "^22.12.0 || ^24.0.0 || >=26.0.0"
   }
 }

@@ -282,4 +282,40 @@ describe("Form enterprise", () => {
       await screen.findByRole("heading", { name: "Inspeksi tidak ditemukan" }),
     ).toBeInTheDocument();
   });
+
+  it("500 menampilkan pesan aman dan retry membaca data tanpa mutasi", async () => {
+    const user = userEvent.setup();
+    requestMock.mockImplementation(async () =>
+      json(
+        {
+          success: false,
+          message: "java.lang.StackTrace: internal",
+          errors: [],
+        },
+        500,
+      ),
+    );
+    page();
+    expect(
+      await screen.findByRole("heading", { name: "Data belum dapat dimuat" }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/java.lang/)).not.toBeInTheDocument();
+    requestMock.mockImplementation(async () => json(vehicles));
+    await user.click(screen.getByRole("button", { name: "Coba lagi" }));
+    expect(await screen.findByLabelText(/Nama inspektur/)).toBeInTheDocument();
+    expect(
+      requestMock.mock.calls.every(([, init]) => init?.method === "GET"),
+    ).toBe(true);
+  });
+  it("network error awal menyediakan retry yang aman", async () => {
+    const user = userEvent.setup();
+    requestMock.mockRejectedValue(new TypeError("Failed to fetch"));
+    page();
+    expect(
+      await screen.findByRole("heading", { name: "Data belum dapat dimuat" }),
+    ).toBeInTheDocument();
+    requestMock.mockImplementation(async () => json(vehicles));
+    await user.click(screen.getByRole("button", { name: "Coba lagi" }));
+    expect(await screen.findByLabelText(/Nama inspektur/)).toBeInTheDocument();
+  });
 });

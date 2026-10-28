@@ -1157,3 +1157,17 @@ h1 + p {
   min-height: 96px;
   font-size: 16px;
 }
+.pwa-actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 20px;
+}
+.pwa-actions button {
+  font-size: 12px;
+}
+.brand {
+  min-height: 44px;
+}
+.mobile-progress > [data-slot="button"] {
+  min-width: 44px;
+}

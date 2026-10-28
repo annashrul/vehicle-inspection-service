@@ -1,0 +1,1 @@
+Ikon monogram L + tanda pemeriksaan dibuat dari bentuk geometris asli untuk repository ini melalui `frontend/scripts/generate-icons.py`. Bukan aset logo resmi LOGIQUE dan tidak diambil dari sumber pihak ketiga. PNG 192/512 serta varian maskable 512 sudah tersedia; build frontend tidak memerlukan Python. Pillow hanya diperlukan untuk regenerasi aset.

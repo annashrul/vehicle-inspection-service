@@ -19,6 +19,7 @@ export async function request<T>(
   try {
     response = await fetch(`${base}/api/v1${path}`, {
       method,
+      cache: "no-store",
       signal,
       headers: { "Content-Type": "application/json" },
       body: body === undefined ? undefined : JSON.stringify(body),

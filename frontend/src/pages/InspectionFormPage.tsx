@@ -67,6 +67,7 @@ import {
   type ValidationMode,
 } from "@/lib/inspection-schema";
 import type { Inspection, Vehicle } from "@/types/api";
+import { PwaActions } from "@/components/pwa/PwaContext";
 import type { Section } from "@/lib/checklist";
 function SummaryContent({ record }: { record: Inspection | null }) {
   return (
@@ -88,6 +89,7 @@ function SummaryContent({ record }: { record: Inspection | null }) {
           valid.
         </p>
       </div>
+      <PwaActions />
     </>
   );
 }
@@ -168,6 +170,9 @@ function InspectionEditor({
     !!serverRecord && !["DRAFT", "RECHECK"].includes(serverRecord.status);
   const dirty = form.formState.isDirty;
   useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("inspection-dirty", { detail: dirty }),
+    );
     const warn = (event: BeforeUnloadEvent) => {
       if (dirty) {
         event.preventDefault();
@@ -175,7 +180,12 @@ function InspectionEditor({
       }
     };
     window.addEventListener("beforeunload", warn);
-    return () => window.removeEventListener("beforeunload", warn);
+    return () => {
+      window.removeEventListener("beforeunload", warn);
+      window.dispatchEvent(
+        new CustomEvent("inspection-dirty", { detail: false }),
+      );
+    };
   }, [dirty]);
   const invalid = (errors: FieldErrors<InspectionValues>) => {
     const issues = orderedErrors(errors);

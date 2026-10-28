@@ -11,7 +11,15 @@ export default defineConfig({
   },
   reporter: [
     ["list"],
-    ["json", { outputFile: "../evidence/redesign/browser-tests.json" }],
+    [
+      "json",
+      {
+        outputFile:
+          process.env.PWA_TEST === "1"
+            ? "../evidence/redesign/pwa-tests.json"
+            : "../evidence/redesign/browser-tests.json",
+      },
+    ],
   ],
   outputDir: "test-results",
   testIgnore: process.env.PWA_TEST === "1" ? [] : ["**/pwa.spec.ts"],
