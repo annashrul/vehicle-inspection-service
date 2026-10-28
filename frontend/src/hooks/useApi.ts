@@ -1,40 +1,51 @@
-import { useCallback, useState } from "react";
-import type { Envelope, FieldError } from "../types/api";
+import type { Envelope, FieldError } from "@/types/api";
 export class ApiError extends Error {
   constructor(
     message: string,
+    public status: number,
     public errors: FieldError[] = [],
   ) {
     super(message);
   }
 }
-const base =
-  (import.meta as unknown as { env: { VITE_API_URL?: string } }).env
-    .VITE_API_URL ?? "http://localhost:8080";
-export function useApi() {
-  const [loading, setLoading] = useState(false);
-  const request = useCallback(
-    async <T>(path: string, method = "GET", body?: unknown): Promise<T> => {
-      setLoading(true);
-      try {
-        const response = await fetch(`${base}/api/v1${path}`, {
-          method,
-          headers: { "Content-Type": "application/json" },
-          body: body === undefined ? undefined : JSON.stringify(body),
-        });
-        const payload: Envelope<T> = await response.json();
-        if (!response.ok || !payload.success)
-          throw new ApiError(payload.message, payload.errors);
-        return payload.data;
-      } catch (e) {
-        throw e instanceof ApiError
-          ? e
-          : new ApiError("Tidak dapat menghubungi server. Coba lagi.");
-      } finally {
-        setLoading(false);
-      }
-    },
-    [],
-  );
-  return { request, loading };
+const base = import.meta.env.VITE_API_URL ?? "http://localhost:8080";
+export async function request<T>(
+  path: string,
+  method = "GET",
+  body?: unknown,
+  signal?: AbortSignal,
+): Promise<T> {
+  let response: Response;
+  try {
+    response = await fetch(`${base}/api/v1${path}`, {
+      method,
+      signal,
+      headers: { "Content-Type": "application/json" },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    });
+  } catch (e) {
+    if (e instanceof DOMException && e.name === "AbortError") throw e;
+    throw new ApiError(
+      "Koneksi terputus. Konfirmasi server belum diterima. Periksa koneksi lalu coba lagi.",
+      0,
+    );
+  }
+  let payload: Envelope<T>;
+  try {
+    payload = await response.json();
+  } catch {
+    throw new ApiError(
+      "Server memberikan respons yang tidak dapat dibaca. Silakan coba lagi.",
+      response.status,
+    );
+  }
+  if (!response.ok || !payload.success)
+    throw new ApiError(
+      response.status >= 500
+        ? "Layanan sedang bermasalah. Data form tetap tersedia; silakan coba lagi."
+        : payload.message,
+      response.status,
+      payload.errors ?? [],
+    );
+  return payload.data;
 }
