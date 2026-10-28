@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+!frontend/.env.example
+**/target/
+**/node_modules/
+**/dist/
+**/__pycache__/
+*.log
+.idea/
+.vscode/

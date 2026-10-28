@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "note": "Contoh khusus technical test (tipe CAR), bukan checklist produksi.",
+  "sections": ["EXTERIOR", "INTERIOR", "ENGINE"],
+  "conditions": ["GOOD", "MINOR_DAMAGE", "MAJOR_DAMAGE", "NOT_INSPECTABLE"],
+  "vehicle_types": {
+    "CAR": [
+      {"point_code": "EXT_FRONT", "section": "EXTERIOR", "label": "Depan"},
+      {"point_code": "EXT_FRONT_RIGHT", "section": "EXTERIOR", "label": "Kanan depan"},
+      {"point_code": "EXT_REAR_RIGHT", "section": "EXTERIOR", "label": "Kanan belakang"},
+      {"point_code": "EXT_REAR", "section": "EXTERIOR", "label": "Belakang"},
+      {"point_code": "EXT_REAR_LEFT", "section": "EXTERIOR", "label": "Kiri belakang"},
+      {"point_code": "EXT_FRONT_LEFT", "section": "EXTERIOR", "label": "Kiri depan"},
+      {"point_code": "EXT_ROOF", "section": "EXTERIOR", "label": "Atap"},
+      {"point_code": "INT_DRIVER_AREA", "section": "INTERIOR", "label": "Area kemudi"},
+      {"point_code": "INT_FRONT_PASSENGER", "section": "INTERIOR", "label": "Penumpang depan"},
+      {"point_code": "INT_REAR_DRIVER_SIDE", "section": "INTERIOR", "label": "Belakang sisi pengemudi"},
+      {"point_code": "INT_REAR_PASSENGER_SIDE", "section": "INTERIOR", "label": "Belakang sisi penumpang"},
+      {"point_code": "INT_TRUNK", "section": "INTERIOR", "label": "Bagasi"},
+      {"point_code": "ENG_STARTUP", "section": "ENGINE", "label": "Mesin menyala"},
+      {"point_code": "ENG_BAY", "section": "ENGINE", "label": "Ruang mesin"}
+    ]
+  }
+}
