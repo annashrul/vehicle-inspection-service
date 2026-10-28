@@ -31,6 +31,7 @@ services:
       MONGODB_URI: mongodb://mongo:27017
       MONGODB_DATABASE: inspection
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+      QUARKUS_FLYWAY_TARGET: ${FLYWAY_TARGET:-latest}
     depends_on:
       postgres: {condition: service_healthy}
       mongo: {condition: service_healthy}
@@ -47,7 +48,8 @@ services:
       QUARKUS_MONGODB_CONNECTION_STRING: mongodb://mongo:27017
       QUARKUS_MONGODB_DATABASE: inspection_test
       QUARKUS_MONGODB_DEVSERVICES_ENABLED: "false"
-    volumes: ["./evidence/test-reports:/app/target/surefire-reports"]
+    volumes:
+      - ./evidence/test-reports:/app/target/surefire-reports
     command: ["mvn", "-B", "test"]
     depends_on:
       postgres: {condition: service_healthy}

@@ -22,35 +22,35 @@ Read `Technical Test - Fullstack #ASL.pdf`, checklist.json, seed_via_api.py and 
 - No bonus until mandatory work is verified.
 
 ## Environment preflight
-Java/Maven absent. Docker daemon access denied. Network disabled by sandbox. .git is an empty read-only mount (not a repository); commits/tags cannot be created here. Do not fabricate history, tests, or benchmarks. Recheck commands at final verification.
+Rechecked 2026-10-28: Docker Engine 29.8.1 and Compose v5.5.1 are available. PostgreSQL and MongoDB are healthy. Java/Maven are not installed on the host; Maven tests run using the Java 21 Docker build image with isolated test databases. The empty .git directory was initialized; origin is https://github.com/annashrul/vehicle-inspection-service.git. Earlier access limitations no longer apply. No existing volume or database has been deleted.
 
 ## Requirement checklist
 Status: [ ] not verified; [x] executed successfully. Source implementation is tracked separately in SUBMISSION.md.
-- [ ] E1 vehicles
-- [ ] E2 create DRAFT
-- [ ] E3 replace editable inspection, version check
-- [ ] E4 detail
-- [ ] E5 filters, pagination, stable ordering
-- [ ] E6 transition
-- [ ] E7 isolated sync batch
-- [ ] E8 ascending audit
-- [ ] R1 valid points, conditions, vehicle
-- [ ] R2 no-key engine rule
-- [ ] R3 notes/photos
-- [ ] R4 legal transitions
-- [ ] R5 14 points and separate missing errors
-- [ ] R6 editable states, stale version, approved immutability
-- [ ] R7 durable append-only MongoDB audit
-- [ ] S1 CREATED
-- [ ] S2 DUPLICATE, no version/audit changes
-- [ ] S3 UPDATED
-- [ ] S4 CONFLICT
-- [ ] S5 partial failure
+- [x] E1 vehicles
+- [x] E2 create DRAFT
+- [x] E3 replace editable inspection, version check
+- [x] E4 detail
+- [x] E5 filters, pagination, stable ordering
+- [x] E6 transition
+- [x] E7 isolated sync batch
+- [x] E8 ascending audit
+- [x] R1 valid points, conditions, vehicle
+- [x] R2 no-key engine rule
+- [x] R3 notes/photos
+- [x] R4 legal transitions
+- [x] R5 14 points and separate missing errors
+- [x] R6 editable states, stale version, approved immutability
+- [x] R7 durable append-only MongoDB audit
+- [x] S1 CREATED
+- [x] S2 DUPLICATE, no version/audit changes
+- [x] S3 UPDATED
+- [x] S4 CONFLICT
+- [x] S5 partial failure
 - [ ] PostgreSQL/Mongo readiness, JSON logging, request ID, OpenAPI
-- [ ] Empty database migrations and Compose startup
-- [ ] Backend automated tests
+- [x] Empty database migrations and Compose startup
+- [x] Backend automated tests
 - [ ] Original seed 50,000, baseline/optimized latency and EXPLAIN
-- [ ] Frontend routes, R2/R3, field errors/toasts, 1280px/768px
-- [ ] Frontend build and dev startup
+- [x] Frontend routes, R2/R3, field errors/toasts, 1280px/768px
+- [x] Frontend build and dev startup
 - [ ] README, submission, AI disclosure, no committed secrets
 - [ ] Six incremental commits, separate perf commit, main tag v1.0-submission
