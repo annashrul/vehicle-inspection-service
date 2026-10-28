@@ -39,6 +39,9 @@ for (const width of [1280, 768]) {
     await page.getByRole("button", { name: "Simpan Draft" }).click();
     await expect(page.getByText("Minimal satu referensi foto.")).toBeVisible();
     await page.getByLabel("Foto Depan", { exact: true }).fill("depan.jpg");
+    await page.getByLabel("Foto Depan", { exact: true }).press("End");
+    await page.getByLabel("Foto Depan", { exact: true }).pressSequentially(", detail.jpg");
+    await expect(page.getByLabel("Foto Depan", { exact: true })).toHaveValue("depan.jpg, detail.jpg");
     await page.getByRole("button", { name: "Simpan Draft" }).click();
     await expect(page).toHaveURL(/\/inspections\/\d+$/);
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
@@ -65,7 +68,7 @@ for (const width of [1280, 768]) {
     await page.reload();
     await expect(page.locator(".badge")).toContainText("SUBMITTED");
     await expect(page.getByLabel("Foto Depan", { exact: true })).toHaveValue(
-      "depan.jpg",
+      "depan.jpg, detail.jpg",
     );
   });
 }

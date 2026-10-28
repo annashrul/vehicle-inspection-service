@@ -13,3 +13,5 @@
 **/*.tsbuildinfo
 frontend/test-results/
 frontend/playwright-report/
+evidence/test-reports/*.xml
+evidence/test-reports/*.dump*

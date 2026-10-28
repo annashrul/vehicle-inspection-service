@@ -3,7 +3,7 @@ WORKDIR /app
 COPY pom.xml .
 RUN mvn -B dependency:go-offline
 COPY src src
-RUN mvn -B package -DskipTests
+RUN mvn -B package -DskipTests && mvn -B dependency:get -Dartifact=org.apache.maven.surefire:surefire-junit-platform:3.5.2
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /app/target/quarkus-app/ ./
