@@ -96,4 +96,16 @@ class ContractTest {
         given().get("/api/v1/inspections?status=DRAFT&vehicle_id=1&page=1&limit=2").then().statusCode(200).body("meta.limit",is(2));
         sync(Arrays.asList(null,Map.of("client_id","bad"),syncInput())).body("data.results.result",contains("REJECTED","REJECTED","CREATED"));
     }
+    @Test void concurrentSameClientCreatesOnce() throws Exception {
+        var input=syncInput();
+        var pool=java.util.concurrent.Executors.newFixedThreadPool(6);
+        try {
+            var tasks=new ArrayList<java.util.concurrent.Callable<String>>();
+            for (int n=0;n<6;n++) tasks.add(() -> sync(List.of(input)).extract().jsonPath().getString("data.results[0].result"));
+            var results=new ArrayList<String>();
+            for (var future:pool.invokeAll(tasks)) results.add(future.get());
+            assertEquals(1,Collections.frequency(results,"CREATED"));
+            assertEquals(5,Collections.frequency(results,"DUPLICATE"));
+        } finally { pool.shutdownNow(); }
+    }
 }

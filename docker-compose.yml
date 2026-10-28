@@ -47,6 +47,7 @@ services:
       QUARKUS_MONGODB_CONNECTION_STRING: mongodb://mongo:27017
       QUARKUS_MONGODB_DATABASE: inspection_test
       QUARKUS_MONGODB_DEVSERVICES_ENABLED: "false"
+    volumes: ["./evidence/test-reports:/app/target/surefire-reports"]
     command: ["mvn", "-B", "test"]
     depends_on:
       postgres: {condition: service_healthy}

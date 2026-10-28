@@ -30,7 +30,7 @@ public class AuditService {
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     public void deliverFor(long id) { deliverPending(id); }
     private void deliverPending(Long id) {
-        // SKIP LOCKED allows multiple instances to drain without blocking one another.
+        // History waits on a dispatcher lock so it can read all committed events for this inspection.
         var query=em.createNativeQuery("select * from audit_outbox where delivered_at is null" + (id==null ? "" : " and inspection_id = :id") + " order by created_at, id" + (id==null ? " limit 500" : "") + " for update",AuditEvent.class);
         if (id!=null) query.setParameter("id",id);
         var pending=query.getResultList();
