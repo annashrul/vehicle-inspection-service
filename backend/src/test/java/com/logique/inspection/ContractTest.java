@@ -34,7 +34,9 @@ class ContractTest {
     @Test void vehiclesHealthAndEnvelope() {
         given().get("/api/v1/vehicles").then().statusCode(200).header("X-Request-ID",not(emptyString())).body("data.size()",is(20)).body("data[0].plate_number",notNullValue());
         given().get("/q/health/ready").then().statusCode(200).body("status",is("UP"));
-        given().get("/q/openapi").then().statusCode(200);
+        given().queryParam("format","json").get("/q/openapi").then().statusCode(200)
+            .body("components.schemas.Write.properties.inspector_name",notNullValue())
+            .body("paths.'/api/v1/inspections'.post.responses.'201'",notNullValue());
     }
     @Test void validationR1R2R3() {
         var input=draft(); input.put("vehicle_id",999999);
