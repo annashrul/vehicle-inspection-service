@@ -6,15 +6,41 @@ Java 21 / Quarkus 3, PostgreSQL 16, MongoDB 7, React + TypeScript. Kontrak beras
 
 ## Menjalankan
 
+Prasyarat: Git, Docker Engine dengan daemon aktif, Docker Compose, serta Node.js `^22.12.0`, `^24.0.0`, atau `>=26.0.0` dan npm. Java/Maven di host tidak diperlukan untuk instalasi melalui Docker.
+
+Clone repositori, lalu jalankan backend dan database dari root project:
+
 ```bash
+git clone https://github.com/annashrul/vehicle-inspection-service.git
+cd vehicle-inspection-service
 docker info
 docker compose version
 docker compose up --build -d
-curl http://localhost:8080/q/health
+docker compose ps -a
+curl --retry 30 --retry-delay 2 --retry-all-errors --fail http://localhost:8080/q/health
+```
+
+Build pertama mengunduh image dan dependensi Maven. Backend masih memerlukan waktu startup setelah Compose selesai; health check harus menampilkan status `UP` dengan pemeriksaan PostgreSQL dan MongoDB `UP`.
+
+Setelah backend siap, jalankan frontend di terminal terpisah dari root project:
+
+```bash
 cd frontend
 npm install
 npm run dev
 ```
+
+Port `5432`, `27017`, `8080`, dan `5173` harus tersedia. Jika instalasi lain project ini sedang berjalan, hentikan layanan instalasi tersebut terlebih dahulu agar port tidak bentrok.
+
+Jika backend gagal startup, periksa `docker compose logs --tail=100 backend`. Migrasi Flyway dijalankan otomatis dan memiliki versi unik: V1 membuat skema dan data kendaraan, V2 membuat indeks query, V3 mengisi UUID `client_id` pada inspeksi lama yang belum memilikinya. Versi sebelumnya memiliki dua file V2 sehingga startup gagal dengan `Found more than one migration with version 2`; migrasi UUID kini bernama `V3__offline_client_ids.sql`. Untuk memperbarui instalasi lama, jalankan kembali `docker compose up --build -d` dari kode terbaru. Tidak perlu menghapus volume database atau menjalankan Flyway repair untuk konflik versi ini.
+
+Untuk menghentikan backend dan database tanpa menghapus data:
+
+```bash
+docker compose down
+```
+
+Hentikan frontend dengan Ctrl+C di terminal Vite.
 
 Buka http://localhost:5173/inspections/new atau `/inspections/:id`. Backend tersedia di http://localhost:8080/api/v1, OpenAPI di `/q/openapi`, Swagger UI di `/q/swagger-ui`.
 
@@ -60,7 +86,7 @@ python3 scripts/benchmark.py after
 
 Seed asli memakai API E7, rasio SUBMITTED sekitar 90%, dan menghasilkan UUID baru pada setiap eksekusi: menjalankannya lagi akan menambah 50.000 baris. Tidak ada penghapusan data otomatis.
 
-Untuk mereproduksi baseline dari kode final pada database **baru**, jalankan `FLYWAY_TARGET=1 docker compose up --build -d` sebelum seed. Ukur baseline, hilangkan pengaturan target, lalu restart backend agar V2 diterapkan. Jangan menurunkan target pada database yang telah menerapkan V2. Skrip benchmark melakukan 5 warmup dan 30 pengukuran per endpoint, menyimpan median/p95 dan seluruh latensi, serta EXPLAIN ANALYZE BUFFERS untuk query ID dan count. Benchmark tidak menjatuhkan index atau menghapus database.
+Untuk mereproduksi baseline dari kode final pada database **baru**, jalankan `FLYWAY_TARGET=1 docker compose up --build -d` sebelum seed. Ukur baseline, hilangkan pengaturan `FLYWAY_TARGET` (termasuk dari `.env` jika diatur di sana), lalu jalankan `docker compose up -d --force-recreate backend` agar V2 dan V3 diterapkan. Jangan menurunkan target pada database yang telah menerapkan V2. Skrip benchmark melakukan 5 warmup dan 30 pengukuran per endpoint, menyimpan median/p95 dan seluruh latensi, serta EXPLAIN ANALYZE BUFFERS untuk query ID dan count. Benchmark tidak menjatuhkan index atau menghapus database.
 
 ## Arsitektur dan keputusan
 
