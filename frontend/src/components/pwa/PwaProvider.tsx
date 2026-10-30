@@ -164,7 +164,7 @@ export function PwaProvider({ children }: { children: ReactNode }) {
             </DialogTitle>
             <DialogDescription>
               {dialog === "install"
-                ? "Buka aplikasi langsung dari layar utama dalam tampilan mandiri. Koneksi internet tetap diperlukan untuk memuat dan menyimpan data inspeksi."
+                ? "Buka aplikasi langsung dari layar utama. Muat data kendaraan sekali saat online sebelum bekerja offline."
                 : "Versi baru sudah tersedia. Pembaruan akan memuat ulang aplikasi; simpan perubahan terlebih dahulu."}
             </DialogDescription>
           </DialogHeader>
@@ -179,15 +179,15 @@ export function PwaProvider({ children }: { children: ReactNode }) {
                 <strong>Bagikan → Tambah ke Layar Utama</strong>.
               </p>
               <p className="text-muted-foreground">
-                Mode offline hanya menyediakan kerangka aplikasi. Draft inspeksi
-                belum disimpan otomatis di perangkat.
+                Simpan Draft atau Submit saat offline menyimpan data di perangkat.
+                Sinkronisasi otomatis berjalan saat koneksi kembali dan aplikasi terbuka.
               </p>
             </div>
           ) : dirty ? (
             <Alert variant="destructive">
               <CircleAlert aria-hidden />
               <AlertDescription>
-                Masih ada perubahan yang belum disimpan. Simpan draft di server
+                Masih ada perubahan yang belum disimpan. Simpan draft
                 sebelum memperbarui aplikasi.
               </AlertDescription>
             </Alert>

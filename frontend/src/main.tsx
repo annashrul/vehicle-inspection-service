@@ -4,11 +4,13 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
 import { PwaProvider } from "@/components/pwa/PwaProvider";
 import "./style.css";
+import { OfflineQueue } from "@/components/pwa/OfflineQueue";
 const InspectionFormPage = lazy(() => import("@/pages/InspectionFormPage"));
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <PwaProvider>
       <BrowserRouter>
+        <OfflineQueue />
         <Suspense
           fallback={
             <p className="p-8" role="status">

@@ -123,6 +123,11 @@ export function InspectionInformation({
                 control={control}
                 render={({ field }) => (
                   <Switch
+                    style={{
+                      position: "absolute",
+                      right: "16px",
+                      top: "20px",
+                    }}
                     {...keyA11y}
                     ref={nav.refFor("has_key", field.ref)}
                     checked={field.value}

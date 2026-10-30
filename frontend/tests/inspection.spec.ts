@@ -119,7 +119,7 @@ for (const size of sizes)
     ).not.toBeVisible();
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
     await page.screenshot({
-      path: `../evidence/redesign/viewport-${size.width}.png`,
+      path: `../evidence/verification/viewport-${size.width}.png`,
     });
     expect(errors).toEqual([]);
   });

@@ -1,11 +1,12 @@
 import { defineConfig } from "@playwright/test";
+const externalServer = process.env.PLAYWRIGHT_BASE_URL;
 export default defineConfig({
   testDir: "./tests",
   timeout: 60000,
   expect: { timeout: 10000 },
   workers: 1,
   use: {
-    baseURL: process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:5173",
+    baseURL: externalServer ?? "http://localhost:5173",
     headless: true,
     trace: "retain-on-failure",
   },
@@ -14,13 +15,15 @@ export default defineConfig({
     [
       "json",
       {
-        outputFile:
-          process.env.PWA_TEST === "1"
-            ? "../evidence/redesign/pwa-tests.json"
-            : "../evidence/redesign/browser-tests.json",
+        outputFile: "../evidence/verification/browser-tests.json",
       },
     ],
   ],
   outputDir: "test-results",
-  testIgnore: process.env.PWA_TEST === "1" ? [] : ["**/pwa.spec.ts"],
+  webServer: externalServer ? undefined : {
+    command: "npm run build && npm run preview -- --port 5173 --strictPort",
+    url: "http://localhost:5173",
+    timeout: 180000,
+    reuseExistingServer: false,
+  },
 });

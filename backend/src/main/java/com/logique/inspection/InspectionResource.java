@@ -5,7 +5,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import static com.logique.inspection.Api.*;
 import java.util.List;
-import org.bson.Document;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.jboss.resteasy.reactive.ResponseStatus;
 import org.eclipse.microprofile.openapi.annotations.responses.*;
 import org.eclipse.microprofile.openapi.annotations.media.*;
@@ -22,12 +22,12 @@ public class InspectionResource {
     @POST @Path("/inspections")
     @ResponseStatus(201)
     @APIResponse(responseCode="201",description="Draft inspection created",content=@Content(schema=@Schema(ref="#/components/schemas/EnvelopeDetail")))
-    public Envelope<Detail> create(Write input) {
+    public Envelope<Detail> create(@RequestBody(required=true) Write input) {
         var detail=service.create(input);
         return Envelope.ok(detail,"Inspection created successfully");
     }
     @PUT @Path("/inspections/{id}")
-    public Envelope<Detail> update(@PathParam("id") long id,Write input) { return Envelope.ok(service.update(id,input),"Inspection updated successfully"); }
+    public Envelope<Detail> update(@PathParam("id") long id,@RequestBody(required=true) Update input) { return Envelope.ok(service.update(id,input==null?null:input.write()),"Inspection updated successfully"); }
     @GET @Path("/inspections/{id}")
     public Envelope<Detail> detail(@PathParam("id") long id) { return Envelope.ok(service.detail(id),"Inspection retrieved successfully"); }
     @GET @Path("/inspections")
@@ -39,11 +39,11 @@ public class InspectionResource {
         catch (NumberFormatException e) { throw ApiException.error(400,"pagination","page, limit and vehicle_id must be valid integers"); }
     }
     @POST @Path("/inspections/{id}/transition")
-    public Envelope<Detail> transition(@PathParam("id") long id,Transition input) { return Envelope.ok(service.transition(id,input),"Status changed successfully"); }
+    public Envelope<Detail> transition(@PathParam("id") long id,@RequestBody(required=true) Transition input) { return Envelope.ok(service.transition(id,input),"Status changed successfully"); }
     @POST @Path("/inspections/sync")
-    public Envelope<Results> sync(SyncBatch input) { return Envelope.ok(sync.sync(input),"Batch processed successfully"); }
+    public Envelope<Results> sync(@RequestBody(required=true) SyncBatch input) { return Envelope.ok(sync.sync(input),"Batch processed successfully"); }
     @GET @Path("/inspections/{id}/audit")
-    public Envelope<List<Document>> audit(@PathParam("id") long id) {
+    public Envelope<List<AuditEntry>> audit(@PathParam("id") long id) {
         service.detail(id); audit.deliverFor(id);
         return Envelope.ok(audit.history(id),"Audit retrieved successfully");
     }

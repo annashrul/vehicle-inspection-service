@@ -52,8 +52,11 @@ public class AuditService {
             event.deliveredAt=Instant.now();
         }
     }
-    public List<Document> history(long id) {
+    public List<Api.AuditEntry> history(long id) {
         return mongo.getDatabase(database).getCollection("audit").find(new Document("inspection_id",id))
-            .sort(new Document("at",1).append("_id",1)).projection(new Document("_id",0)).into(new ArrayList<>());
+            .sort(new Document("at",1).append("_id",1)).projection(new Document("_id",0)).into(new ArrayList<>())
+            .stream().map(doc -> new Api.AuditEntry(((Number)doc.get("inspection_id")).longValue(),doc.getString("action"),
+                doc.getString("from_status"),doc.getString("to_status"),doc.getString("actor"),
+                Instant.parse(doc.getString("at")),doc.get("meta",Document.class))).toList();
     }
 }

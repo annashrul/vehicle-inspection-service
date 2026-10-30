@@ -69,6 +69,7 @@ import {
 import type { Inspection, Vehicle } from "@/types/api";
 import { PwaActions } from "@/components/pwa/PwaContext";
 import type { Section } from "@/lib/checklist";
+import { enqueue, localRead, localWrite, syncQueue, type PendingInspection } from "@/lib/offline";
 function SummaryContent({ record }: { record: Inspection | null }) {
   return (
     <>
@@ -170,6 +171,20 @@ function InspectionEditor({
     !!serverRecord && !["DRAFT", "RECHECK"].includes(serverRecord.status);
   const dirty = form.formState.isDirty;
   useEffect(() => {
+    const synced = () => {
+      if (!serverRecord?.client_id) return;
+      void localRead<PendingInspection>(`queue:${serverRecord.client_id}`).then((entry) => {
+        if (entry?.state === "synced" && !form.formState.isDirty) {
+          setServerRecord(entry.record);
+          form.reset(fromInspection(entry.record));
+          if (!record?.id) navigate(`/inspections/${entry.record.id}`, { replace: true });
+        }
+      }).catch(() => {});
+    };
+    window.addEventListener("inspection-queue", synced);
+    return () => window.removeEventListener("inspection-queue", synced);
+  }, [serverRecord?.client_id, form, navigate, record?.id]);
+  useEffect(() => {
     window.dispatchEvent(
       new CustomEvent("inspection-dirty", { detail: dirty }),
     );
@@ -195,7 +210,7 @@ function InspectionEditor({
     });
   };
   async function save(values: InspectionValues, submit: boolean) {
-    if (inFlight.current || readOnly || !online || conflict || uncertain)
+    if (inFlight.current || readOnly || conflict || uncertain)
       return;
     inFlight.current = true;
     setBusy(true);
@@ -203,6 +218,17 @@ function InspectionEditor({
     form.clearErrors();
     let saved: Inspection | null = null;
     try {
+      const queued = serverRecord?.client_id
+        ? await localRead<PendingInspection>(`queue:${serverRecord.client_id}`).catch(() => undefined) : undefined;
+      if (!online || serverRecord?.id === 0 || (queued && queued.state !== "synced")) {
+        const entry = await enqueue(values, submit, serverRecord);
+        setServerRecord(entry.record);
+        form.reset(fromInspection(entry.record));
+        toast.success("Inspeksi tersimpan di perangkat dan akan disinkronkan otomatis.");
+        if (!record) navigate(`/inspections/local-${entry.record.client_id}`, { replace: true });
+        if (navigator.onLine) void syncQueue().catch(() => {});
+        return;
+      }
       saved = await request<Inspection>(
         serverRecord ? `/inspections/${serverRecord.id}` : "/inspections",
         serverRecord ? "PUT" : "POST",
@@ -213,6 +239,7 @@ function InspectionEditor({
       );
       setServerRecord(saved);
       form.reset(fromInspection(saved));
+      await localWrite(`record:${saved.id}`, saved).catch(() => {});
       if (submit) {
         saved = await request<Inspection>(
           `/inspections/${saved.id}/transition`,
@@ -221,6 +248,7 @@ function InspectionEditor({
         );
         setServerRecord(saved);
         form.reset(fromInspection(saved));
+        await localWrite(`record:${saved.id}`, saved).catch(() => {});
       }
       toast.success(
         submit
@@ -233,7 +261,7 @@ function InspectionEditor({
         error instanceof ApiError
           ? error
           : new ApiError(
-              "Permintaan belum dapat diproses. Data form tetap tersedia.",
+              error instanceof Error ? error.message : "Permintaan belum dapat diproses. Data form tetap tersedia.",
               500,
             );
       if (failure.status === 409) setConflict(true);
@@ -297,9 +325,8 @@ function InspectionEditor({
                   <CloudOff />
                   <AlertTitle>Anda sedang offline</AlertTitle>
                   <AlertDescription>
-                    Form tetap tersedia selama halaman ini terbuka. Penyimpanan
-                    ke server memerlukan koneksi; draft belum disimpan otomatis
-                    di perangkat.
+                    Simpan Draft atau Submit untuk menyimpan inspeksi di perangkat.
+                    Data akan disinkronkan otomatis saat koneksi kembali dan aplikasi terbuka.
                   </AlertDescription>
                 </Alert>
               )}
@@ -388,7 +415,7 @@ function InspectionEditor({
               <ErrorCount onSummary={() => setSheet(true)} />
               <StickyActionBar
                 busy={busy}
-                disabled={!online || conflict || uncertain}
+                disabled={conflict || uncertain}
                 readOnly={readOnly}
                 dirty={dirty}
                 onSave={saveDraft}

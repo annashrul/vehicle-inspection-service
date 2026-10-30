@@ -11,7 +11,8 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "lint": "eslint .",
-    "test:pwa": "PWA_TEST=1 playwright test pwa.spec.ts"
+    "test:pwa": "playwright test pwa.spec.ts",
+    "test:offline": "playwright test offline.spec.ts offline-integration.spec.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^6.0.2",

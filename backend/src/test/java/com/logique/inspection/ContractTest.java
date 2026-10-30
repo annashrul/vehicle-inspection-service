@@ -116,6 +116,31 @@ class ContractTest {
         assertTrue(spec.path("paths").path("/api/v1/inspections").path("get").path("responses").has("200"));
         assertTrue(spec.path("components").path("schemas").has("Detail"));
     }
+    @Test void openApiMatchesAuditAndWriteContracts() throws Exception {
+        var spec=mapper.readTree(given().queryParam("format","json").get("/q/openapi").then().statusCode(200).extract().asString());
+        var schemas=spec.path("components").path("schemas");
+        var auditFields=schemas.path("AuditEntry").path("properties");
+        for (String field:List.of("inspection_id","action","from_status","to_status","actor","at","meta"))
+            assertTrue(auditFields.has(field),field);
+        assertFalse(auditFields.has("documentAsMap"));
+        assertEquals("#/components/schemas/EnvelopeListAuditEntry",spec.path("paths").path("/api/v1/inspections/{id}/audit")
+            .path("get").path("responses").path("200").path("content").path("application/json").path("schema").path("$ref").asText());
+        for (String field:List.of("vehicle_id","inspector_name","has_key"))
+            assertTrue(schemas.path("Write").path("required").toString().contains("\""+field+"\""));
+        assertFalse(schemas.path("Write").path("required").toString().contains("\"version\""));
+        assertTrue(schemas.path("Update").path("required").toString().contains("\"version\""));
+        assertEquals(2,schemas.path("SyncInput").path("properties").path("status").path("enum").size());
+        assertEquals(4,schemas.path("Item").path("properties").path("condition").path("enum").size());
+        var input=draft(); input.put("items",complete());
+        long id=create(input);
+        given().contentType("application/json").body(Map.of("to","SUBMITTED","actor","audit-schema"))
+            .post("/api/v1/inspections/"+id+"/transition").then().statusCode(200);
+        var actual=mapper.readTree(given().get("/api/v1/inspections/"+id+"/audit").then().statusCode(200).extract().asString())
+            .path("data").get(0);
+        actual.fieldNames().forEachRemaining(field -> assertTrue(auditFields.has(field),field));
+        assertEquals(id,actual.path("inspection_id").asLong());
+        assertEquals("TRANSITION",actual.path("action").asText());
+    }
     void verifyReferences(com.fasterxml.jackson.databind.JsonNode node,com.fasterxml.jackson.databind.JsonNode root) {
         if (node.has("$ref")) {
             String ref=node.path("$ref").asText();

@@ -19,7 +19,7 @@ public class InspectionService {
         if (input==null) throw ApiException.error(400,"body","Request body is required");
         vehicles.require(input.vehicleId());
         var items=rules.validate(input.inspectorName(),input.hasKey(),input.items(),false);
-        Inspection i=new Inspection(); i.vehicleId=input.vehicleId(); i.status="DRAFT"; i.version=1;
+        Inspection i=new Inspection(); i.clientId=java.util.UUID.randomUUID(); i.vehicleId=input.vehicleId(); i.status="DRAFT"; i.version=1;
         i.createdAt=Instant.now(); i.updatedAt=i.createdAt;
         replace(i,input.inspectorName(),input.hasKey(),items);
         inspections.persistAndFlush(i);

@@ -62,7 +62,7 @@ test("offline application shell tersedia; respons dan mutasi API tidak di-cache"
     page.getByRole("status").filter({ hasText: "Offline" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Data belum dapat dimuat" }),
+    page.getByRole("textbox", { name: "Nama inspektur", exact: true }),
   ).toBeVisible();
   const urls = await page.evaluate(async () => {
     const result: string[] = [];
@@ -77,7 +77,6 @@ test("offline application shell tersedia; respons dan mutasi API tidak di-cache"
     urls.some((url) => url.includes("/api/v1") || url.includes(":8080")),
   ).toBe(false);
   await context.setOffline(false);
-  await page.getByRole("button", { name: "Coba lagi", exact: true }).click();
   await expect(
     page.getByRole("textbox", { name: "Nama inspektur", exact: true }),
   ).toBeVisible();
@@ -138,7 +137,7 @@ test("pembaruan nyata menunggu persetujuan dan melindungi form yang belum disimp
   }
 });
 
-test("form di memori tetap utuh saat offline dan tidak dikirim otomatis saat kembali online", async ({
+test("form yang belum disimpan tetap utuh saat offline dan tidak dikirim otomatis", async ({
   page,
   context,
 }) => {
@@ -159,7 +158,7 @@ test("form di memori tetap utuh saat offline dan tidak dikirim otomatis saat kem
   await context.setOffline(true);
   await expect(
     page.getByRole("button", { name: "Simpan Draft", exact: true }),
-  ).toBeDisabled();
+  ).toBeEnabled();
   await expect(name).toHaveValue("Catatan lokal di memori");
   await expect(
     page.getByText("Anda sedang offline", { exact: true }),
