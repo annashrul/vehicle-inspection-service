@@ -1,0 +1,7 @@
+Command: ['./mvnw', 'test']
+Directory: /home/elqantara/Projects/logique-technical-test/backend
+Started UTC: 2026-10-29T10:47:16.292690+00:00
+
+Java 21 is required (or run with the Docker build image).
+
+Exit code: 1

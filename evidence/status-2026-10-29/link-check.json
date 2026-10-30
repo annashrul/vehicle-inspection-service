@@ -1,0 +1,521 @@
+{
+  "checked": 103,
+  "missing": [],
+  "links": [
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "Technical%20Test%20-%20Fullstack%20%23ASL.pdf",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "backend/src/main/java/com/logique/inspection/InspectionResource.java",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "backend/src/main/java/com/logique/inspection/Rules.java",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/outbox-recovery.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "scripts/seed_via_api.py",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "performance/README.md",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "frontend/src/lib/offline.ts",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "frontend/src/components/pwa/OfflineQueue.tsx",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/test-reports/com.logique.inspection.ContractTest.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/browser-tests.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/pwa-tests.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "frontend/tests/offline.spec.ts",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "README.md",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "SUBMISSION.md",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "FRONTEND_REDESIGN.md",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/README.md",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/README.md",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "performance/README.md",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/status-2026-10-29/checks.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/status-2026-10-29/frontend-build.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/status-2026-10-29/frontend-unit.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/status-2026-10-29/frontend-lint.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/status-2026-10-29/offline-browser.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/status-2026-10-29/offline-browser.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "frontend/tests/offline.spec.ts",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/status-2026-10-29/backend-test-attempt.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/status-2026-10-29/migration-versions.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/status-2026-10-29/git-status.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/status-2026-10-29/git-history.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/status-2026-10-29/git-tags.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/vehicles.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "backend/src/main/resources/db/migration/V1__schema_and_vehicles.sql",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/test-reports/com.logique.inspection.ContractTest.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "backend/src/test/java/com/logique/inspection/ContractTest.java",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/maven-tests.log",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/fresh-database-tests.log",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/openapi.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "backend/src/main/java/com/logique/inspection/InspectionResource.java",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "backend/src/main/java/com/logique/inspection/Api.java",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/health-final.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/health-current.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/request-id-headers.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "backend/src/main/java/com/logique/inspection/RequestLogging.java",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/final-containers.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "docker-compose.yml",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/final-database-checks.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/final-mongo-checks.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/outbox-recovery.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "scripts/verify_outbox.py",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "backend/src/main/java/com/logique/inspection/AuditService.java",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/runtime-checks.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "performance/before.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "performance/after.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "performance/before-database-checks.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "performance/before-indexes.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "performance/before-page-1-explain.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "performance/after-page-1-explain.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "performance/before-page-2000-explain.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "performance/after-page-2000-explain.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/seed-script-integrity.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/seed-50000.log",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "scripts/seed_via_api.py",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "scripts/benchmark.py",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "SUBMISSION.md#3-performa-sebelum-dan-sesudah",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/frontend-tests.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "frontend/tests/inspection.spec.ts",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/browser-tests.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/pwa-tests.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "frontend/tests/pwa.spec.ts",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/pwa-manifest.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/icons.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/dependencies.txt",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/npm-audit.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/npm-audit-runtime.json",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "frontend/src/pages/InspectionFormPage.test.tsx",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "frontend/src/lib/inspection-schema.test.ts",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/build.log",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/lint.log",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/unit.log",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-1920.png",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-1440.png",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-1280.png",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-1024.png",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-820.png",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-768.png",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-430.png",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-390.png",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-375.png",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-320.png",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-1280.png",
+      "exists": true
+    },
+    {
+      "document": "STATUS_TECHNICAL_TEST.md",
+      "href": "evidence/redesign/viewport-768.png",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "../../STATUS_TECHNICAL_TEST.md",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "checks.json",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "frontend-build.txt",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "frontend-unit.txt",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "frontend-lint.txt",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "offline-browser.txt",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "offline-browser.json",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "backend-test-attempt.txt",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "migration-versions.json",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "git-status.txt",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "git-history.txt",
+      "exists": true
+    },
+    {
+      "document": "evidence/status-2026-10-29/README.md",
+      "href": "git-tags.txt",
+      "exists": true
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+Command: ['npm', 'run', 'test']
+Directory: /home/elqantara/Projects/logique-technical-test/frontend
+Started UTC: 2026-10-29T10:45:56.146962+00:00
+
+
+> logique-inspection@1.0.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /home/elqantara/Projects/logique-technical-test/frontend
+
+
+ Test Files  2 passed (2)
+      Tests  20 passed (20)
+   Start at  17:45:58
+   Duration  42.26s (tests 64%, environment 20%, import 8%, setup 6%, transform 2%)
+
+    Isolate  2 workers spawned · ~4.52s startup each (spawn + environment, per file)
+             at least ~4.52s faster with isolate: false — reuses workers across files instead of one per file
+
+
+Exit code: 0

@@ -1,0 +1,16 @@
+ M FRONTEND_REDESIGN.md
+ M README.md
+ M backend/src/main/java/com/logique/inspection/InspectionService.java
+ M frontend/src/components/inspection/InspectionInformation.tsx
+ M frontend/src/components/pwa/PwaProvider.tsx
+ M frontend/src/hooks/useInspection.ts
+ M frontend/src/main.tsx
+ M frontend/src/pages/InspectionFormPage.tsx
+ M frontend/tests/pwa.spec.ts
+?? CARA_MENJALANKAN.md
+?? STATUS_TECHNICAL_TEST.md
+?? backend/src/main/resources/db/migration/V2__offline_client_ids.sql
+?? evidence/status-2026-10-29/
+?? frontend/src/components/pwa/OfflineQueue.tsx
+?? frontend/src/lib/offline.ts
+?? frontend/tests/offline.spec.ts

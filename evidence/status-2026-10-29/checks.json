@@ -1,0 +1,58 @@
+[
+  {
+    "name": "frontend-build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "started_utc": "2026-10-29T10:45:56.145588+00:00",
+    "exit_code": 0,
+    "log": "frontend-build.log"
+  },
+  {
+    "name": "frontend-unit",
+    "command": [
+      "npm",
+      "run",
+      "test"
+    ],
+    "started_utc": "2026-10-29T10:45:56.146962+00:00",
+    "exit_code": 0,
+    "log": "frontend-unit.log"
+  },
+  {
+    "name": "frontend-lint",
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "started_utc": "2026-10-29T10:45:56.147946+00:00",
+    "exit_code": 0,
+    "log": "frontend-lint.log"
+  },
+  {
+    "name": "offline-browser",
+    "command": [
+      "npx",
+      "playwright",
+      "test",
+      "offline.spec.ts",
+      "--reporter=list,json"
+    ],
+    "started_utc": "2026-10-29T10:46:40.920662+00:00",
+    "exit_code": 0,
+    "log": "offline-browser.log"
+  },
+  {
+    "name": "backend-test-attempt",
+    "command": [
+      "./mvnw",
+      "test"
+    ],
+    "started_utc": "2026-10-29T10:47:16.292690+00:00",
+    "exit_code": 1,
+    "log": "backend-test-attempt.log"
+  }
+]

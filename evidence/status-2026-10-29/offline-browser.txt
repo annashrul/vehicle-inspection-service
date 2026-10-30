@@ -1,0 +1,18 @@
+Command: ['npx', 'playwright', 'test', 'offline.spec.ts', '--reporter=list,json']
+Directory: /home/elqantara/Projects/logique-technical-test/frontend
+Started UTC: 2026-10-29T10:46:40.920662+00:00
+
+
+Running 5 tests using 1 worker
+
+(node:73369) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync CREATED (6.9s)
+  ✓  2 tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync UPDATED (5.8s)
+  ✓  3 tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync CONFLICT (6.7s)
+  ✓  4 tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync REJECTED (6.4s)
+  ✓  5 tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync retry (6.3s)
+
+  5 passed (33.5s)
+
+Exit code: 0

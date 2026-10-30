@@ -1,0 +1,10 @@
+Command: ['npm', 'run', 'lint']
+Directory: /home/elqantara/Projects/logique-technical-test/frontend
+Started UTC: 2026-10-29T10:45:56.147946+00:00
+
+
+> logique-inspection@1.0.0 lint
+> eslint .
+
+
+Exit code: 0

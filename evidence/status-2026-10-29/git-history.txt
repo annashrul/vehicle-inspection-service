@@ -1,0 +1,17 @@
+11fd9c4 docs: record verified frontend redesign and PWA limitations
+ea20b72 feat: add safe installable PWA shell and confirmed cross-tab updates
+315763f fix: preserve native keyboard navigation and accessible checklist status
+f52a871 feat: redesign adaptive inspection form with accessible validation
+c157a80 docs: finalize submission with verified tests and performance evidence
+003feb4 fix: preserve OpenAPI success schemas and validate every reference
+74fe2e6 perf: index inspection filters and record before-after measurements
+068fd7f fix: provide recovery when initial inspection loading fails
+a15dd37 test: cache Maven provider and cover typing multiple photo references
+a41bf6d test: add reproducible performance and audit recovery checks
+f829240 fix: enforce numeric query validation and document snake case API
+0c15f26 fix: refine API schemas and preserve audit visibility during dispatch
+541a3b6 feat: add responsive React inspection form and browser tests
+86d7c0e feat: expose inspection API with contract tests
+c03c6ad feat: implement inspection rules and transactional sync outbox
+7ffaebe feat: add Quarkus persistence and Docker infrastructure
+5f2f77d chore: preserve test requirements and implementation plan
