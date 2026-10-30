@@ -16,3 +16,5 @@ Rincian 29 tes: 16 form online/viewport, 5 offline dengan API simulasi, 3 offlin
 Screenshot terbaru: [1280px](viewport-1280.png), [768px](viewport-768.png), serta delapan viewport lain dalam folder ini. Screenshot historis di `evidence/redesign/` tidak ditimpa.
 
 Tes backend menggunakan database baru `inspection_submission_final`, bukan database aplikasi. Volume aplikasi tidak dihapus. Percobaan awal sempat terhenti akibat DNS Maven; setelah koneksi pulih, pengujian berhasil. Tes sentuh juga menemukan kelas ukuran toggle yang hilang; setelah dipulihkan seluruh 29 tes lulus. Angka performa tidak diulang untuk mengklaim hasil baru.
+
+[clean-clone.json](clean-clone.json) mencatat instalasi dari clone GitHub commit `6ca097f`, database kosong, migrasi V1–V4, health UP, 20 kendaraan, npm install/dev, HTTP frontend 200, serta kecocokan checksum seluruh sumber dengan hasil pengujian. Commit setelahnya hanya mencatat evidence/dokumentasi.

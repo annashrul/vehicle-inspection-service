@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-30",
+  "clone_url": "https://github.com/annashrul/vehicle-inspection-service.git",
+  "clone_commit": "6ca097fa95b6a8fc6d738fef53ebab14bede8c1e",
+  "application_sources_match_tested_checksums": true,
+  "new_database": true,
+  "migrations": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "docker_compose_up_build": "passed",
+  "backend_health": {
+    "status": "UP",
+    "checks": [
+      {
+        "name": "Database connections health check",
+        "status": "UP",
+        "data": {
+          "<default>": "UP"
+        }
+      },
+      {
+        "name": "MongoDB connection health check",
+        "status": "UP",
+        "data": {
+          "<default>": "OK"
+        }
+      }
+    ]
+  },
+  "vehicles": 20,
+  "npm_install": "passed; 4 low severity audit findings",
+  "npm_run_dev": "passed",
+  "frontend_http": 200,
+  "checkout_clean": true,
+  "note": "Subsequent evidence-only commit does not change application source checksums."
+}

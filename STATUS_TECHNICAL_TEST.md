@@ -21,7 +21,7 @@ Kandidat: **annashrul yusuf**. Durasi pengerjaan yang dikonfirmasi kandidat: **2
 
 | Temuan | Penyelesaian |
 |---|---|
-| F1 tag snapshot lama | Snapshot final dan arsip tag awal diselaraskan setelah seluruh verifikasi selesai; periksa tag remote untuk commit yang dikumpulkan |
+| F1 tag snapshot lama | Tag final `v1.0-submission` diselaraskan dengan main setelah verifikasi; snapshot awal c157a80 dipertahankan pada `v1.0-submission-initial` |
 | F2 suite offline tidak tersambung | OfflineQueue, IndexedDB dan handler form diaktifkan; Playwright membangun dan menjalankan preview produksi otomatis |
 | F3 schema audit berbeda | Endpoint E8 memakai DTO AuditEntry; tes membandingkan schema, required/enum, dan field respons aktual |
 | F4 dokumentasi/workspace berbeda | README, SUBMISSION, panduan, status dan laporan redesign diperbarui. Evidence lama tetap berlabel historis |
@@ -40,6 +40,8 @@ Kandidat: **annashrul yusuf**. Durasi pengerjaan yang dikonfirmasi kandidat: **2
 | Offline backend nyata | 3 tes lulus |
 | PWA | 5 tes lulus |
 
+
+Clone GitHub commit `6ca097f` juga berhasil diinstal pada database kosong: V1–V4, health UP, 20 kendaraan, npm install/dev, HTTP frontend 200. Seluruh checksum sumber cocok dengan versi yang lulus pengujian; lihat [clean-clone.json](evidence/verification/clean-clone.json).
 
 Hasil akhir pengujian dan laporan browser disimpan di [evidence/verification](evidence/verification/README.md). Pemeriksaan mencakup backend pada database test terpisah, build produksi, lint/unit, form online, PWA, lima skenario offline dengan API simulasi, dan tiga skenario offline dengan backend nyata.
 
