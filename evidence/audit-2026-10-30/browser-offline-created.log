@@ -1,0 +1,53 @@
+
+Running 1 test using 1 worker
+
+(node:36519) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync CREATED (32.2s)
+
+
+  1) tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync CREATED ───────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Submit', exact: true })
+        - locator resolved to <button disabled type="button" data-slot="button" data-size="default" data-variant="default" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0…>…</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        25 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+        - waiting for element to be visible, enabled and stable
+
+
+      58 |     await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
+      59 |     await context.setOffline(true);
+    > 60 |     await page.getByRole("button", { name: "Submit", exact: true }).click();
+         |                                                                     ^
+      61 |     await page.getByRole("button", { name: "Ya, ajukan inspeksi" }).click();
+      62 |     await expect(page.getByRole("complementary", { name: "Antrean sinkronisasi" })).toContainText("menunggu sinkronisasi");
+      63 |     if (outcome !== "UPDATED") await expect(page).toHaveURL(/local-/);
+        at /home/elqantara/Projects/vehicle-inspection-service-fresh-install/frontend/tests/offline.spec.ts:60:69
+
+    Error Context: ../../../../../tmp/logique-audit-offline-results/offline-submit-offline-ber-3ee42-lah-reload-dan-sync-CREATED/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../tmp/logique-audit-offline-results/offline-submit-offline-ber-3ee42-lah-reload-dan-sync-CREATED/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../../tmp/logique-audit-offline-results/offline-submit-offline-ber-3ee42-lah-reload-dan-sync-CREATED/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync CREATED ────────────

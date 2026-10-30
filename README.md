@@ -32,7 +32,7 @@ npm run dev
 
 Port `5432`, `27017`, `8080`, dan `5173` harus tersedia. Jika instalasi lain project ini sedang berjalan, hentikan layanan instalasi tersebut terlebih dahulu agar port tidak bentrok.
 
-Jika backend gagal startup, periksa `docker compose logs --tail=100 backend`. Migrasi Flyway dijalankan otomatis dan memiliki versi unik: V1 membuat skema dan data kendaraan, V2 membuat indeks query, V3 mengisi UUID `client_id` pada inspeksi lama yang belum memilikinya. Versi sebelumnya memiliki dua file V2 sehingga startup gagal dengan `Found more than one migration with version 2`; migrasi UUID kini bernama `V3__offline_client_ids.sql`. Untuk memperbarui instalasi lama, jalankan kembali `docker compose up --build -d` dari kode terbaru. Tidak perlu menghapus volume database atau menjalankan Flyway repair untuk konflik versi ini.
+Jika backend gagal startup, periksa `docker compose logs --tail=100 backend`. Migrasi Flyway dijalankan otomatis dan memiliki versi unik: V1 membuat skema dan data kendaraan, V2 membuat indeks query, V3 mengisi UUID `client_id` pada inspeksi lama, dan V4 mengisi record yang masih dibuat tanpa UUID oleh build lama setelah V3 diterapkan. E2 pada build baru langsung memberi UUID tetap. Versi sebelumnya memiliki dua file V2 sehingga startup gagal dengan `Found more than one migration with version 2`; migrasi UUID kini bernama `V3__offline_client_ids.sql`. Untuk memperbarui instalasi lama, jalankan kembali `docker compose up --build -d` dari kode terbaru. Tidak perlu menghapus volume database atau menjalankan Flyway repair untuk konflik versi ini.
 
 Untuk menghentikan backend dan database tanpa menghapus data:
 
@@ -48,30 +48,30 @@ Konfigurasi lokal ada di `.env.example`; salin ke `.env` jika perlu mengubah nil
 
 ## Pengujian
 
-Dengan Java 21 dan Docker di host:
+Backend: dengan Java 21 dan Docker di host, jalankan `cd backend && ./mvnw test`. Quarkus Dev Services membuat database test tersendiri.
 
-```bash
-cd backend
-./mvnw test
-```
-
-Quarkus Dev Services membuat database test tersendiri. Alternatif tanpa Java host, gunakan database tambahan di Compose (buat sekali; bila sudah ada, tidak perlu dibuat ulang):
+Alternatif tanpa Java host, dari root project dengan PostgreSQL/MongoDB sudah berjalan (buat database test sekali saja):
 
 ```bash
 docker compose exec -T postgres createdb -U inspection inspection_test
 docker compose --profile test run --build --rm tests
 ```
 
-Service `tests` menjalankan `mvn -B test`, memakai PostgreSQL `inspection_test` dan MongoDB `inspection_test`. Tes tidak membersihkan database aplikasi. Bukti hasil aktual dan keterbatasan ada di `SUBMISSION.md` dan `evidence/`.
+Jika `inspection_test` sudah ada, lewati `createdb`. Service `tests` memakai PostgreSQL dan MongoDB `inspection_test`, terpisah dari data aplikasi.
+
+Frontend: hentikan dev server atau preview lain di port 5173, biarkan backend di port 8080 tetap berjalan, lalu dari folder `frontend/`:
 
 ```bash
-cd frontend
-npm run build
+npm install
+npm run test
+npm run lint
 npx playwright install chromium
-npx playwright test
+npm run test:e2e
 ```
 
-Tes browser membutuhkan backend dan Vite yang sudah berjalan. Empat tes browser mencakup pula kegagalan koneksi awal dan tombol coba lagi. Tes membuat inspeksi baru, menguji validasi R2/R3, E2/E3/E6/E4, pesan error API, dan viewport 1280/768.
+`test:e2e` membangun frontend dan menjalankan preview produksi di port 5173 secara otomatis melalui Playwright. Seluruh suite mencakup form online, 10 viewport (termasuk 1280/768), PWA, lima skenario offline dengan API simulasi, dan integrasi offline dengan backend nyata. Service worker diperlukan untuk tes offline; jangan menggantinya dengan dev server.
+
+Untuk menjalankan subset, gunakan `npm run test:pwa` atau `npm run test:offline`; keduanya juga menyiapkan preview produksi otomatis. Jika memakai preview yang sudah disiapkan sendiri, set `PLAYWRIGHT_BASE_URL=http://localhost:5173`. Origin selain 5173 memerlukan penyesuaian `CORS_ORIGINS` backend. Laporan browser terbaru ditulis ke `evidence/verification/browser-tests.json`; bukti lama di `evidence/redesign/` tetap historis.
 
 ## Seed dan benchmark
 
@@ -86,7 +86,7 @@ python3 scripts/benchmark.py after
 
 Seed asli memakai API E7, rasio SUBMITTED sekitar 90%, dan menghasilkan UUID baru pada setiap eksekusi: menjalankannya lagi akan menambah 50.000 baris. Tidak ada penghapusan data otomatis.
 
-Untuk mereproduksi baseline dari kode final pada database **baru**, jalankan `FLYWAY_TARGET=1 docker compose up --build -d` sebelum seed. Ukur baseline, hilangkan pengaturan `FLYWAY_TARGET` (termasuk dari `.env` jika diatur di sana), lalu jalankan `docker compose up -d --force-recreate backend` agar V2 dan V3 diterapkan. Jangan menurunkan target pada database yang telah menerapkan V2. Skrip benchmark melakukan 5 warmup dan 30 pengukuran per endpoint, menyimpan median/p95 dan seluruh latensi, serta EXPLAIN ANALYZE BUFFERS untuk query ID dan count. Benchmark tidak menjatuhkan index atau menghapus database.
+Untuk mereproduksi baseline dari kode final pada database **baru**, jalankan `FLYWAY_TARGET=1 docker compose up --build -d` sebelum seed. Ukur baseline, hilangkan pengaturan `FLYWAY_TARGET` (termasuk dari `.env` jika diatur di sana), lalu jalankan `docker compose up -d --force-recreate backend` agar V2–V4 diterapkan. Jangan menurunkan target pada database yang telah menerapkan V2. Skrip benchmark melakukan 5 warmup dan 30 pengukuran per endpoint, menyimpan median/p95 dan seluruh latensi, serta EXPLAIN ANALYZE BUFFERS untuk query ID dan count. Benchmark tidak menjatuhkan index atau menghapus database.
 
 ## Arsitektur dan keputusan
 
@@ -120,4 +120,12 @@ Frontend terbaru menggunakan React Hook Form/Zod, Tailwind 4, 17 komponen shadcn
 
 Laporan lengkap, struktur, 10 viewport, aksesibilitas, PWA dan batas offline: [FRONTEND_REDESIGN.md](FRONTEND_REDESIGN.md). Bukti baru dipisahkan di [evidence/redesign](evidence/redesign/README.md); bukti dan benchmark sesi awal tetap historis. Node LTS 22.12/24 atau versi yang sesuai engines diperlukan.
 
-Tes frontend terbaru: `npm run test` (Vitest/RTL), `npm run lint`, `npm run test:e2e`, dan `npm run test:pwa`. PWA memakai `npm run build` lalu `npm run preview -- --port 5173 --strictPort`, dengan backend tetap di 8080. Dev server dan preview tidak dapat memakai port 5173 bersamaan. Tidak ada IndexedDB draft atau sync E7 offline; application shell dapat dibuka offline, sedangkan data inspeksi memerlukan jaringan.
+Tes frontend: `npm run test` (Vitest/RTL), `npm run lint`, `npm run test:e2e`, `npm run test:offline`, dan `npm run test:pwa`. Tes browser menyiapkan build/preview produksi otomatis; backend tetap di 8080. Untuk mencoba PWA secara manual, gunakan `npm run build` lalu `npm run preview -- --port 5173 --strictPort`; hentikan dev server terlebih dahulu.
+
+Draft dan submit saat offline disimpan di IndexedDB `logique-offline`, object store `data`, dengan key `queue:<client_id>`. Kendaraan dan inspeksi yang pernah dimuat juga disimpan untuk dibuka offline. Klik **Simpan Draft** atau **Submit** untuk menyimpan; perubahan yang belum disimpan tidak dipersist otomatis. Sinkronisasi memakai `/inspections/sync`, UUID tetap, dan `base_version` untuk retry tanpa duplikasi. Antrean dikirim saat aplikasi terbuka: ketika online, saat tab difokuskan, dan setiap 15 detik. Menutup aplikasi menunda sinkronisasi sampai aplikasi dibuka kembali. Konflik/penolakan tetap tersimpan dan ditampilkan untuk ditinjau, tanpa menimpa server otomatis. Status `synced` tetap disimpan sebagai tanda terima lokal.
+
+Tes manual: buka aplikasi online sekali agar service worker dan data kendaraan tersedia; lengkapi 14 titik; pilih DevTools → Network → Offline; klik Submit dan konfirmasi. Antrean harus muncul. Refresh: data tetap ada. Kembalikan No throttling: antrean hilang setelah server mengonfirmasi, status menjadi Diajukan. Periksa IndexedDB di DevTools → Application. Tes browser khusus: `npm run test:offline`, mencakup API simulasi dan backend nyata. Backend perlu dibangun ulang agar migrasi V3/V4 dan pemberian UUID E2 aktif untuk inspeksi lama maupun baru.
+
+## Pengumpulan dan bukti
+
+Identitas kandidat dan durasi ada di [SUBMISSION.md](SUBMISSION.md). Tag pengumpulan adalah `v1.0-submission`. [STATUS_TECHNICAL_TEST.md](STATUS_TECHNICAL_TEST.md) merangkum status verifikasi terbaru; laporan audit sebelumnya tetap disimpan sebagai catatan snapshot yang diaudit, bukan status implementasi terkini. Bukti seed/performa tanggal 28 Oktober tidak diklaim sebagai pengukuran ulang.

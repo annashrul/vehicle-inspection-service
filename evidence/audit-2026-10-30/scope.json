@@ -1,0 +1,31 @@
+{
+  "audit_date": "2026-10-30",
+  "audited_commit": "6ae99351bc4179fc92b41e20249411aa67326e8a",
+  "audited_checkout": "/home/elqantara/Projects/vehicle-inspection-service-fresh-install",
+  "submission_tag_commit": "c157a8018f57e525714f53f698d1596277e3dda6",
+  "scope": "Committed GitHub main, compared with local uncommitted changes",
+  "results": {
+    "backend_tests": 10,
+    "api_contract_checks": 34,
+    "frontend_unit_tests": 20,
+    "online_browser_tests": 16,
+    "pwa_browser_tests": 5,
+    "offline_created_probe": "failed: Submit disabled while offline"
+  },
+  "historical_only": [
+    "50000 record seed",
+    "before/after performance benchmark"
+  ],
+  "logs_sha256": {
+    "backend-tests.log": "9c8c1652715d552d66ab4ded0e99ace3e6ae18d56c96cb32665ca43a6bd426ef",
+    "frontend-build.log": "4cc9c05d92a02a87353e77d3a9ab4ed186181410ec5d27c836d17cb1e1dffb3b",
+    "frontend-unit.log": "8e0bf12738da9afe756244b36361dcb95d31cbde2addd45a5ccddb81a4448871",
+    "frontend-lint.log": "e9e4295c5c13e04f7d175694ec2aeff40f1670d3c8f6d30c4e73ffd167541a92",
+    "browser-online.log": "92710da6511c146526ef5f9c86534db2c6074be7c04902a302d48e73a553292f",
+    "browser-offline-created.log": "d531fe82f276c77c8890aed590032516c134727ca4e44bcaba538f628213a30f",
+    "browser-pwa.log": "cfad194faeb268c7f5626d3f88f6b14531c2bcab38d5ad18f6f8fe1d0f05d3a2",
+    "contract-checks.json": "48b97ac4366f322cb87a7012d9d39f8b39c0d38119d87cd532d660fc51240dbd",
+    "contract-checks.py": "00ab4727e077d9ad095ef6913fc3575d2b2210e131a0cbf04dd4af9aa228b54d",
+    "openapi-runtime.json": "41f2841f002d63b73986611441146fdce74aaa804899b40ed48663ebe6f5543a"
+  }
+}

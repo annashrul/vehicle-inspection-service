@@ -1,0 +1,56 @@
+
+> logique-inspection@1.0.0 test:e2e
+> playwright test
+
+[WebServer] (node:110603) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] node_modules/zod/v4/core/util.js (400:0): A comment
+[WebServer] 
+[WebServer] "// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+[WebServer] 
+[WebServer] in "node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+[WebServer] node_modules/zod/v4/core/regexes.js (74:0): A comment
+[WebServer] 
+[WebServer] "/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+[WebServer]  * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+[WebServer]  * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+[WebServer] 
+[WebServer] in "node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+[WebServer] (node:111309) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 29 tests using 1 worker
+
+(node:111327) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/inspection.spec.ts:49:3 › adaptif 320px: layout, partial draft, focus Accordion dan overflow (5.0s)
+  ✓   2 tests/inspection.spec.ts:49:3 › adaptif 375px: layout, partial draft, focus Accordion dan overflow (3.6s)
+  ✓   3 tests/inspection.spec.ts:49:3 › adaptif 390px: layout, partial draft, focus Accordion dan overflow (6.6s)
+  ✓   4 tests/inspection.spec.ts:49:3 › adaptif 430px: layout, partial draft, focus Accordion dan overflow (5.6s)
+  ✓   5 tests/inspection.spec.ts:49:3 › adaptif 768px: layout, partial draft, focus Accordion dan overflow (4.9s)
+  ✓   6 tests/inspection.spec.ts:49:3 › adaptif 820px: layout, partial draft, focus Accordion dan overflow (3.9s)
+  ✓   7 tests/inspection.spec.ts:49:3 › adaptif 1024px: layout, partial draft, focus Accordion dan overflow (4.6s)
+  ✓   8 tests/inspection.spec.ts:49:3 › adaptif 1280px: layout, partial draft, focus Accordion dan overflow (5.0s)
+  ✓   9 tests/inspection.spec.ts:49:3 › adaptif 1440px: layout, partial draft, focus Accordion dan overflow (5.4s)
+  ✓  10 tests/inspection.spec.ts:49:3 › adaptif 1920px: layout, partial draft, focus Accordion dan overflow (5.4s)
+  ✓  11 tests/inspection.spec.ts:126:1 › integrasi backend E2/E3/E6: draft parsial, foto, submit dan detail read-only (16.5s)
+  ✓  12 tests/inspection.spec.ts:229:1 › 409 menjaga input dan memuat data terbaru hanya setelah konfirmasi (3.3s)
+  ✓  13 tests/inspection.spec.ts:285:1 › keyboard dapat mencapai Select, Switch dan RadioGroup (2.6s)
+  ✓  14 tests/inspection.spec.ts:322:3 › interaksi sentuh › Switch dan pilihan kondisi dapat digunakan dengan sentuhan (1.9s)
+  ✓  15 tests/inspection.spec.ts:344:1 › 400 backend membuka Accordion dan memfokuskan error pertama secara visual (2.5s)
+  ✓  16 tests/inspection.spec.ts:393:1 › action bar memberi ruang ketika visual viewport menyempit untuk keyboard (1.5s)
+  ✓  17 tests/offline-integration.spec.ts:24:1 › backend nyata: submit offline, respons hilang, retry DUPLICATE tanpa audit ganda (12.0s)
+  ✓  18 tests/offline-integration.spec.ts:63:3 › backend nyata: draft E2 offline UPDATED mempertahankan UUID dan id (3.7s)
+  ✓  19 tests/offline-integration.spec.ts:63:3 › backend nyata: draft E2 offline CONFLICT menjaga data lokal (3.3s)
+  ✓  20 tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync CREATED (6.2s)
+  ✓  21 tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync UPDATED (5.0s)
+  ✓  22 tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync CONFLICT (5.7s)
+  ✓  23 tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync REJECTED (5.9s)
+  ✓  24 tests/offline.spec.ts:8:3 › submit offline bertahan setelah reload dan sync retry (6.0s)
+  ✓  25 tests/pwa.spec.ts:17:1 › manifest, ikon PNG aktual dan service worker aktif (1.3s)
+  ✓  26 tests/pwa.spec.ts:54:1 › offline application shell tersedia; respons dan mutasi API tidak di-cache (1.7s)
+  ✓  27 tests/pwa.spec.ts:87:1 › pembaruan nyata menunggu persetujuan dan melindungi form yang belum disimpan (5.1s)
+  ✓  28 tests/pwa.spec.ts:140:1 › form yang belum disimpan tetap utuh saat offline dan tidak dikirim otomatis (1.3s)
+  ✓  29 tests/pwa.spec.ts:173:1 › aktivasi versi baru dari tab lain tidak menghapus perubahan tab aktif (6.0s)
+
+  29 passed (3.4m)

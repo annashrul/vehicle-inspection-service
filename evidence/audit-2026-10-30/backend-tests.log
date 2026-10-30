@@ -1,0 +1,178 @@
+ Container vehicle-inspection-service-fresh-install-mongo-1 Running 
+ Container vehicle-inspection-service-fresh-install-postgres-1 Running 
+ Image vehicle-inspection-service-fresh-install-tests Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 685B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile:
+#2 transferring dockerfile: 437B 0.0s done
+#2 DONE 0.4s
+
+#3 [internal] load metadata for docker.io/library/maven:3.9.9-eclipse-temurin-21
+#3 DONE 8.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context:
+#4 transferring context: 52B done
+#4 DONE 0.6s
+
+#5 [internal] load build context
+#5 DONE 0.0s
+
+#6 [build 1/6] FROM docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#6 resolve docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#6 resolve docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e 1.6s done
+#6 DONE 1.8s
+
+#5 [internal] load build context
+#5 transferring context: 2.35kB 0.0s done
+#5 DONE 0.4s
+
+#7 [build 2/6] WORKDIR /app
+#7 CACHED
+
+#8 [build 3/6] COPY pom.xml .
+#8 CACHED
+
+#9 [build 4/6] RUN mvn -B dependency:go-offline
+#9 CACHED
+
+#10 [build 5/6] COPY src src
+#10 CACHED
+
+#11 [build 6/6] RUN mvn -B package -DskipTests && mvn -B dependency:get -Dartifact=org.apache.maven.surefire:surefire-junit-platform:3.5.2
+#11 CACHED
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 23.9s done
+#12 exporting manifest sha256:1b1438eeef29baa6ba80d37dec8894c38e55caa38c5a95e1015d7eb6e08d44af
+#12 exporting manifest sha256:1b1438eeef29baa6ba80d37dec8894c38e55caa38c5a95e1015d7eb6e08d44af 0.3s done
+#12 exporting config sha256:c9ff7da7dea4532ddcc42dfc43663a9349d40f94160ad81eb8b32c388608cde6
+#12 exporting config sha256:c9ff7da7dea4532ddcc42dfc43663a9349d40f94160ad81eb8b32c388608cde6 0.3s done
+#12 exporting attestation manifest sha256:73ceb0a9135c63bd3b0242b163951fc8aeda7f4d47d07c9536a536b8363db669
+#12 exporting attestation manifest sha256:73ceb0a9135c63bd3b0242b163951fc8aeda7f4d47d07c9536a536b8363db669 0.5s done
+#12 exporting manifest list sha256:21e762f97128cafa0b1bbace9617e279c67fbb6be133956227e7d79d51475bb4
+#12 exporting manifest list sha256:21e762f97128cafa0b1bbace9617e279c67fbb6be133956227e7d79d51475bb4 0.3s done
+#12 naming to docker.io/library/vehicle-inspection-service-fresh-install-tests:latest
+#12 naming to docker.io/library/vehicle-inspection-service-fresh-install-tests:latest 0.0s done
+#12 unpacking to docker.io/library/vehicle-inspection-service-fresh-install-tests:latest
+#12 unpacking to docker.io/library/vehicle-inspection-service-fresh-install-tests:latest 3.8s done
+#12 DONE 29.4s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+ Image vehicle-inspection-service-fresh-install-tests Built 
+ Container vehicle-inspection-service-fresh-install-mongo-1 Waiting 
+ Container vehicle-inspection-service-fresh-install-postgres-1 Waiting 
+ Container vehicle-inspection-service-fresh-install-mongo-1 Healthy 
+ Container vehicle-inspection-service-fresh-install-postgres-1 Healthy 
+ Container vehicle-inspection-service-fresh-install-tests-run-26bc494296b0 Creating 
+ Container vehicle-inspection-service-fresh-install-tests-run-26bc494296b0 Created 
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< com.logique:vehicle-inspection >-------------------
+[INFO] Building vehicle-inspection 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ vehicle-inspection ---
+[INFO] Copying 5 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- quarkus:3.15.3:generate-code (default) @ vehicle-inspection ---
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ vehicle-inspection ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- quarkus:3.15.3:generate-code-tests (default) @ vehicle-inspection ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ vehicle-inspection ---
+[INFO] skip non existing resourceDirectory /app/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ vehicle-inspection ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ vehicle-inspection ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.pom (2.8 kB at 685 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar (103 kB at 542 kB/s)
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.logique.inspection.ContractTest
+{"timestamp":"2026-10-30T08:47:27.892876819Z","sequence":9,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.flywaydb.core.FlywayExecutor","level":"INFO","message":"Database: jdbc:postgresql://postgres:5432/inspection_test (PostgreSQL 16.15)","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:28.11500709Z","sequence":10,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory","level":"INFO","message":"Schema history table \"public\".\"flyway_schema_history\" does not exist yet","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:28.121545355Z","sequence":11,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.flywaydb.core.internal.command.DbValidate","level":"INFO","message":"Successfully validated 3 migrations (execution time 00:00.107s)","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:28.163641328Z","sequence":12,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory","level":"INFO","message":"Creating Schema History table \"public\".\"flyway_schema_history\" ...","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:28.520220348Z","sequence":13,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.flywaydb.core.internal.command.DbMigrate","level":"INFO","message":"Current version of schema \"public\": << Empty Schema >>","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:28.568818971Z","sequence":14,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.flywaydb.core.internal.command.DbMigrate","level":"INFO","message":"Migrating schema \"public\" to version \"1 - schema and vehicles\"","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:29.073095548Z","sequence":15,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.flywaydb.core.internal.command.DbMigrate","level":"INFO","message":"Migrating schema \"public\" to version \"2 - inspection query indexes\"","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:29.433949935Z","sequence":16,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.flywaydb.core.internal.command.DbMigrate","level":"INFO","message":"Migrating schema \"public\" to version \"3 - offline client ids\"","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:29.473433505Z","sequence":17,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.flywaydb.core.internal.command.DbMigrate","level":"INFO","message":"Successfully applied 3 migrations to schema \"public\", now at version v3 (execution time 00:00.764s)","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:32.738602304Z","sequence":19,"loggerClassName":"org.jboss.logging.Logger","loggerName":"io.quarkus","level":"INFO","message":"vehicle-inspection 1.0.0 on JVM (powered by Quarkus 3.15.3) started in 34.490s. Listening on: http://localhost:8081","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:32.740914578Z","sequence":21,"loggerClassName":"org.jboss.logging.Logger","loggerName":"io.quarkus","level":"INFO","message":"Profile test activated. ","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:32.74151844Z","sequence":23,"loggerClassName":"org.jboss.logging.Logger","loggerName":"io.quarkus","level":"INFO","message":"Installed features: [agroal, cdi, flyway, hibernate-orm, hibernate-orm-panache, jdbc-postgresql, mongodb-client, narayana-jta, rest, rest-jackson, scheduler, smallrye-context-propagation, smallrye-health, smallrye-openapi, swagger-ui, vertx]","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:34.037015512Z","sequence":25,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.mongodb.driver.client","level":"INFO","message":"MongoClient with metadata {\"driver\": {\"name\": \"mongo-java-driver|sync\", \"version\": \"5.1.4\"}, \"os\": {\"type\": \"Linux\", \"name\": \"Linux\", \"architecture\": \"amd64\", \"version\": \"7.0.0-38-generic\"}, \"platform\": \"Java/Eclipse Adoptium/21.0.7+6-LTS\", \"env\": {\"container\": {\"runtime\": \"docker\"}}} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=true}, retryWrites=false, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@7d3b5007, com.mongodb.Jep395RecordCodecProvider@5c6942d5, com.mongodb.KotlinCodecProvider@2b801f37]}, ProvidersCodecRegistry{codecProviders=[org.bson.codecs.pojo.PojoCodecProvider@197085a9]}]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[mongo:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverMonitoringMode=AUTO, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=UNSPECIFIED, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}","threadName":"executor-thread-1","threadId":103,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:34.132837222Z","sequence":26,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.mongodb.driver.cluster","level":"INFO","message":"Monitor thread successfully connected to server with description ServerDescription{address=mongo:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=191795097}","threadName":"cluster-ClusterId{value='6ae459a5e66e18608a2ae23b', description='null'}-mongo:27017","threadId":119,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:42.665055276Z","sequence":27,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=1525.398","threadName":"executor-thread-4","threadId":130,"mdc":{"request_id":"9e11efb1-c55f-42ab-9f4e-7e86bf50d997"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:42.937499532Z","sequence":29,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=1844.591","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"e481d8ce-54f6-4e7a-8c7e-f840f48eee86"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:43.023239403Z","sequence":31,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=1876.780","threadName":"executor-thread-6","threadId":132,"mdc":{"request_id":"f1e2509a-a6ce-4fda-aab0-b7cf351b0987"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:43.089824176Z","sequence":33,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=1944.586","threadName":"executor-thread-5","threadId":131,"mdc":{"request_id":"adfd44f8-c53f-43a5-818d-c0a9bafe95b2"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:43.109147883Z","sequence":35,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=1968.293","threadName":"executor-thread-3","threadId":129,"mdc":{"request_id":"008f90f2-00b7-4d14-a081-57f1a1360f71"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:43.159638814Z","sequence":37,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=2066.202","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"0bee1dd2-1f53-4e8f-9cc6-25b758c1024f"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:46.084767926Z","sequence":39,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=118.529","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"f875cddc-2f7c-49e2-90da-5592ef923410"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:46.425431493Z","sequence":41,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/2/transition status=200 duration_ms=188.710","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"c4683332-5f57-4ecf-8383-79d29d402947"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:46.583519253Z","sequence":43,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=43.514","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"ed8aeadb-da30-46cf-a892-86064d2b3531"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:46.931974767Z","sequence":45,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"GET /api/v1/vehicles status=200 duration_ms=94.280","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"e80cd5e3-4bf7-4595-954d-43b6f4e9da60"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:48.526746028Z","sequence":47,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=36.051","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"f1b9f35e-faba-4382-9b92-d4b11178a0d8"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:48.674399956Z","sequence":49,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=94.327","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"68af5408-42fc-4582-ac10-93b5ced8dc07"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:48.808641616Z","sequence":51,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=19.430","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"54addfa3-7081-4e03-a29c-7e50632413c2"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:49.117062772Z","sequence":53,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=115.598","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"8ca1783a-fa20-4d0f-a0d9-0714d9427634"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:49.259491035Z","sequence":55,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"GET /api/v1/inspections/3 status=200 duration_ms=13.476","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"5b108735-bcad-4ce9-8aab-f029e7a9a686"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:49.469663333Z","sequence":57,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"GET /api/v1/inspections/3/audit status=200 duration_ms=150.846","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"e1196e89-75d6-4f07-8cf2-3c505e218d16"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:49.990259558Z","sequence":59,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections status=201 duration_ms=366.436","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"9c140fbb-d609-4b47-a0ae-4512edbd828a"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:50.038818611Z","sequence":61,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/5/transition status=400 duration_ms=10.992","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"d5c34a90-4fb6-4bca-aafe-cba8d04cd644"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:50.150476348Z","sequence":63,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/5/transition status=409 duration_ms=10.565","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"03768078-b12f-4031-8c89-00a077d2bfb2"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:50.184760322Z","sequence":65,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/5/transition status=400 duration_ms=4.469","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"0c6900de-1cb5-427c-b1af-2103e1f1e752"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:50.325602576Z","sequence":67,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections status=201 duration_ms=69.649","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"c9ac04cc-bc0c-4b22-b15f-758ca561dbed"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:50.542437839Z","sequence":69,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"PUT /api/v1/inspections/6 status=200 duration_ms=94.071","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"7d3aa79e-0745-404f-bbb5-22969a2e23f4"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:50.751483496Z","sequence":71,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"PUT /api/v1/inspections/6 status=409 duration_ms=97.470","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"068d4421-9547-41b1-9664-860caf129b01"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:50.869162486Z","sequence":73,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/6/transition status=200 duration_ms=45.041","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"034bba0c-3093-4278-af1e-0396bf72b731"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:50.98529728Z","sequence":75,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/6/transition status=200 duration_ms=51.404","threadName":"executor-thread-2","threadId":120,"mdc":{"request_id":"3cf418cd-aa14-4455-bd02-c6ac3b410a56"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:51.200521033Z","sequence":77,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/6/transition status=200 duration_ms=138.659","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"d2f62b8a-3573-4b04-839a-85af46da044d"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:51.310239205Z","sequence":79,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/6/transition status=200 duration_ms=68.425","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"8c234814-214d-49f5-a34f-b961cc90b347"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:51.349485727Z","sequence":81,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"PUT /api/v1/inspections/6 status=409 duration_ms=5.337","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"5180a84c-c7ee-40fc-b57b-34396cb9fc8a"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:51.449349117Z","sequence":83,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"GET /api/v1/inspections/6/audit status=200 duration_ms=73.512","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"09a5e49b-c324-457b-a589-712ca5d44541"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:51.608900276Z","sequence":85,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections status=400 duration_ms=33.982","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"21b4b81b-b386-479e-8827-0b8e91a50967"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:51.729017534Z","sequence":87,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=400 duration_ms=3.086","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"c6163e70-de5a-47b6-b905-f13cdec636d4"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:51.781750831Z","sequence":89,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"GET /api/v1/inspections status=400 duration_ms=0.618","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"4ed75ca3-1883-40d3-9096-3994d05afd80"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:51.816507103Z","sequence":91,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"GET /api/v1/inspections status=400 duration_ms=0.533","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"43abb895-569c-403c-b957-4e8265a272f7"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:52.825880585Z","sequence":93,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"GET /api/v1/inspections status=200 duration_ms=964.830","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"9491213e-b148-42af-a8b2-ad633715f212"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:53.125661573Z","sequence":95,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=88.744","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"8aec9af0-cd46-4ce5-9944-1e76d950dfa0"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:53.243858238Z","sequence":97,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections status=404 duration_ms=15.646","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"83f3a7ce-d236-4d6c-bb04-6bf514165f9a"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:53.281607345Z","sequence":99,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections status=400 duration_ms=7.791","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"78d30b77-793d-4bec-8ef5-45680f2a366f"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:53.347341484Z","sequence":101,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections status=400 duration_ms=4.479","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"9f18a940-c524-405f-bd20-53540bb9ffe5"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:53.442141963Z","sequence":103,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections status=400 duration_ms=14.259","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"198c7e5d-9891-47d4-b92a-0b80ef59e49f"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:53.534004517Z","sequence":105,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=52.505","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"ee2705b2-d03f-4592-a043-fc396d12014b"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:53.716897728Z","sequence":107,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"GET /api/v1/inspections/8 status=200 duration_ms=39.334","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"2da76569-e6f9-4f44-8705-80a8f3eb55e4"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:53.835176831Z","sequence":109,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"POST /api/v1/inspections/sync status=200 duration_ms=70.773","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"0a67108d-1890-4188-a557-333fd55dcb69"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:53.920373437Z","sequence":111,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"GET /api/v1/inspections/8 status=200 duration_ms=24.024","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"2be6ee8e-bd1d-4969-ab19-88da1ab8cf08"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+{"timestamp":"2026-10-30T08:47:54.046958864Z","sequence":113,"loggerClassName":"org.jboss.logging.Logger","loggerName":"com.logique.inspection.RequestLogging","level":"INFO","message":"GET /api/v1/inspections/8/audit status=200 duration_ms=72.399","threadName":"executor-thread-1","threadId":103,"mdc":{"request_id":"436f8f21-addd-4317-86ce-479b29f65764"},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 76.82 s -- in com.logique.inspection.ContractTest
+{"timestamp":"2026-10-30T08:47:54.422152024Z","sequence":115,"loggerClassName":"org.jboss.logging.Logger","loggerName":"io.quarkus","level":"INFO","message":"vehicle-inspection stopped in 0.323s","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"0a04eb51a934","processName":"/opt/java/openjdk/bin/java","processId":69}
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:10 min
+[INFO] Finished at: 2026-10-30T08:47:54Z
+[INFO] ------------------------------------------------------------------------

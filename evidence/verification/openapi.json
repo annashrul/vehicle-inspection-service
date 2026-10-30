@@ -1,0 +1,1735 @@
+{
+  "openapi" : "3.0.3",
+  "info" : {
+    "title" : "Vehicle Inspection Service",
+    "version" : "1.0.0"
+  },
+  "paths" : {
+    "/api/v1/inspections" : {
+      "get" : {
+        "tags" : [ "Inspection Resource" ],
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "schema" : {
+            "default" : "10",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "schema" : {
+            "default" : "1",
+            "minimum" : 1,
+            "type" : "integer"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "vehicle_id",
+          "in" : "query",
+          "schema" : {
+            "format" : "int64",
+            "minimum" : 1,
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EnvelopeListDetail"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Infrastructure failure",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Version conflict or illegal transition",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request or validation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Inspection Resource" ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Write"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Draft inspection created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EnvelopeDetail"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Infrastructure failure",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Version conflict or illegal transition",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request or validation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inspections/sync" : {
+      "post" : {
+        "tags" : [ "Inspection Resource" ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SyncBatch"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EnvelopeResults"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Infrastructure failure",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Version conflict or illegal transition",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request or validation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inspections/{id}" : {
+      "get" : {
+        "tags" : [ "Inspection Resource" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EnvelopeDetail"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Infrastructure failure",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Version conflict or illegal transition",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request or validation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Inspection Resource" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Update"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EnvelopeDetail"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Infrastructure failure",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Version conflict or illegal transition",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request or validation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inspections/{id}/audit" : {
+      "get" : {
+        "tags" : [ "Inspection Resource" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EnvelopeListAuditEntry"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Infrastructure failure",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Version conflict or illegal transition",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request or validation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inspections/{id}/transition" : {
+      "post" : {
+        "tags" : [ "Inspection Resource" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Transition"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EnvelopeDetail"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Infrastructure failure",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Version conflict or illegal transition",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request or validation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/vehicles" : {
+      "get" : {
+        "tags" : [ "Inspection Resource" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EnvelopeListVehicle"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Infrastructure failure",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Version conflict or illegal transition",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request or validation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Resource not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "success" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    },
+                    "errors" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "field" : {
+                            "type" : "string"
+                          },
+                          "reason" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "AuditEntry" : {
+        "type" : "object",
+        "properties" : {
+          "inspection_id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "action" : {
+            "type" : "string"
+          },
+          "from_status" : {
+            "type" : "string",
+            "nullable" : true
+          },
+          "to_status" : {
+            "type" : "string",
+            "nullable" : true
+          },
+          "actor" : {
+            "type" : "string"
+          },
+          "at" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "meta" : {
+            "type" : "object",
+            "additionalProperties" : { }
+          }
+        }
+      },
+      "Detail" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "vehicle_id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "client_id" : {
+            "$ref" : "#/components/schemas/UUID"
+          },
+          "inspector_name" : {
+            "type" : "string"
+          },
+          "has_key" : {
+            "type" : "boolean"
+          },
+          "status" : {
+            "enum" : [ "DRAFT", "SUBMITTED", "APPROVED", "RECHECK" ],
+            "type" : "string"
+          },
+          "version" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "created_at" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "updated_at" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Item"
+            }
+          }
+        }
+      },
+      "EnvelopeDetail" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/Detail"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/Meta"
+          },
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FieldError"
+            }
+          }
+        }
+      },
+      "EnvelopeListAuditEntry" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuditEntry"
+            }
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/Meta"
+          },
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FieldError"
+            }
+          }
+        }
+      },
+      "EnvelopeListDetail" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Detail"
+            }
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/Meta"
+          },
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FieldError"
+            }
+          }
+        }
+      },
+      "EnvelopeListVehicle" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Vehicle"
+            }
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/Meta"
+          },
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FieldError"
+            }
+          }
+        }
+      },
+      "EnvelopeResults" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/Results"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/Meta"
+          },
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FieldError"
+            }
+          }
+        }
+      },
+      "FieldError" : {
+        "type" : "object",
+        "properties" : {
+          "field" : {
+            "type" : "string"
+          },
+          "reason" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Instant" : {
+        "format" : "date-time",
+        "type" : "string",
+        "example" : "2022-03-10T16:15:50Z"
+      },
+      "Item" : {
+        "required" : [ "point_code", "condition" ],
+        "type" : "object",
+        "properties" : {
+          "point_code" : {
+            "type" : "string"
+          },
+          "condition" : {
+            "enum" : [ "GOOD", "MINOR_DAMAGE", "MAJOR_DAMAGE", "NOT_INSPECTABLE" ],
+            "type" : "string"
+          },
+          "note" : {
+            "description" : "Required and nonblank for NOT_INSPECTABLE",
+            "type" : "string",
+            "nullable" : true
+          },
+          "photo_refs" : {
+            "description" : "At least one nonblank reference for MAJOR_DAMAGE; null or omitted means empty",
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true
+          }
+        }
+      },
+      "Meta" : {
+        "type" : "object",
+        "properties" : {
+          "page" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "limit" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "total" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        }
+      },
+      "Results" : {
+        "type" : "object",
+        "properties" : {
+          "results" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SyncResult"
+            }
+          }
+        }
+      },
+      "SyncBatch" : {
+        "required" : [ "device_id", "inspections" ],
+        "type" : "object",
+        "properties" : {
+          "device_id" : {
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "inspections" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SyncInput"
+            }
+          }
+        }
+      },
+      "SyncInput" : {
+        "required" : [ "client_id", "vehicle_id", "inspector_name", "has_key", "status" ],
+        "type" : "object",
+        "properties" : {
+          "client_id" : {
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "base_version" : {
+            "format" : "int32",
+            "description" : "Null for a new inspection; required to match the server version for updates",
+            "type" : "integer",
+            "nullable" : true
+          },
+          "vehicle_id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "inspector_name" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "has_key" : {
+            "type" : "boolean"
+          },
+          "status" : {
+            "description" : "SUBMITTED requires all 14 checklist points",
+            "enum" : [ "DRAFT", "SUBMITTED" ],
+            "type" : "string"
+          },
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Item"
+            }
+          }
+        }
+      },
+      "SyncResult" : {
+        "type" : "object",
+        "properties" : {
+          "client_id" : {
+            "type" : "string"
+          },
+          "result" : {
+            "enum" : [ "CREATED", "UPDATED", "DUPLICATE", "CONFLICT", "REJECTED" ],
+            "type" : "string"
+          },
+          "inspection_id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "server_version" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "server_status" : {
+            "type" : "string"
+          },
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FieldError"
+            }
+          }
+        }
+      },
+      "Transition" : {
+        "required" : [ "to", "actor" ],
+        "type" : "object",
+        "properties" : {
+          "to" : {
+            "description" : "Legal transitions: DRAFT/RECHECK to SUBMITTED; SUBMITTED to APPROVED/RECHECK",
+            "enum" : [ "DRAFT", "SUBMITTED", "APPROVED", "RECHECK" ],
+            "type" : "string"
+          },
+          "actor" : {
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "note" : {
+            "type" : "string",
+            "nullable" : true
+          }
+        }
+      },
+      "UUID" : {
+        "format" : "uuid",
+        "pattern" : "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
+        "type" : "string"
+      },
+      "Update" : {
+        "required" : [ "inspector_name", "has_key", "version" ],
+        "type" : "object",
+        "properties" : {
+          "vehicle_id" : {
+            "format" : "int64",
+            "description" : "Optional; must match the existing vehicle",
+            "type" : "integer"
+          },
+          "inspector_name" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "has_key" : {
+            "type" : "boolean"
+          },
+          "items" : {
+            "description" : "Replaces all items; omitted or null means empty",
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Item"
+            }
+          },
+          "version" : {
+            "format" : "int32",
+            "description" : "Must equal the current server version",
+            "type" : "integer"
+          }
+        }
+      },
+      "Vehicle" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "plate_number" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "brand" : {
+            "type" : "string"
+          },
+          "model" : {
+            "type" : "string"
+          },
+          "year" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }
+      },
+      "Write" : {
+        "required" : [ "vehicle_id", "inspector_name", "has_key" ],
+        "type" : "object",
+        "properties" : {
+          "vehicle_id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "inspector_name" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "has_key" : {
+            "type" : "boolean"
+          },
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Item"
+            }
+          },
+          "version" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }
+      }
+    }
+  }
+}

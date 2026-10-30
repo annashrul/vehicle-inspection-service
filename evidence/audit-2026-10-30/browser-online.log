@@ -1,0 +1,23 @@
+
+Running 16 tests using 1 worker
+
+(node:35149) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/inspection.spec.ts:49:3 › adaptif 320px: layout, partial draft, focus Accordion dan overflow (11.9s)
+  ✓   2 tests/inspection.spec.ts:49:3 › adaptif 375px: layout, partial draft, focus Accordion dan overflow (9.4s)
+  ✓   3 tests/inspection.spec.ts:49:3 › adaptif 390px: layout, partial draft, focus Accordion dan overflow (8.1s)
+  ✓   4 tests/inspection.spec.ts:49:3 › adaptif 430px: layout, partial draft, focus Accordion dan overflow (7.5s)
+  ✓   5 tests/inspection.spec.ts:49:3 › adaptif 768px: layout, partial draft, focus Accordion dan overflow (7.3s)
+  ✓   6 tests/inspection.spec.ts:49:3 › adaptif 820px: layout, partial draft, focus Accordion dan overflow (10.0s)
+  ✓   7 tests/inspection.spec.ts:49:3 › adaptif 1024px: layout, partial draft, focus Accordion dan overflow (11.5s)
+  ✓   8 tests/inspection.spec.ts:49:3 › adaptif 1280px: layout, partial draft, focus Accordion dan overflow (19.4s)
+  ✓   9 tests/inspection.spec.ts:49:3 › adaptif 1440px: layout, partial draft, focus Accordion dan overflow (15.8s)
+  ✓  10 tests/inspection.spec.ts:49:3 › adaptif 1920px: layout, partial draft, focus Accordion dan overflow (9.4s)
+  ✓  11 tests/inspection.spec.ts:126:1 › integrasi backend E2/E3/E6: draft parsial, foto, submit dan detail read-only (43.4s)
+  ✓  12 tests/inspection.spec.ts:229:1 › 409 menjaga input dan memuat data terbaru hanya setelah konfirmasi (11.2s)
+  ✓  13 tests/inspection.spec.ts:285:1 › keyboard dapat mencapai Select, Switch dan RadioGroup (8.1s)
+  ✓  14 tests/inspection.spec.ts:322:3 › interaksi sentuh › Switch dan pilihan kondisi dapat digunakan dengan sentuhan (5.0s)
+  ✓  15 tests/inspection.spec.ts:344:1 › 400 backend membuka Accordion dan memfokuskan error pertama secara visual (4.9s)
+  ✓  16 tests/inspection.spec.ts:393:1 › action bar memberi ruang ketika visual viewport menyempit untuk keyboard (2.4s)
+
+  16 passed (3.2m)

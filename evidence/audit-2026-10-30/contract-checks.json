@@ -1,0 +1,230 @@
+{
+  "checks": [
+    {
+      "check": "E1: 20 kendaraan, id 1..20",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "E2: DRAFT version 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R5: 14 error untuk titik kosong",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "E3: replace items, version 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R6: stale PUT ditolak 409",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "E4: PUT stale tidak mengubah data",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "E3: PUT mengganti seluruh items menjadi kosong",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R4: transisi ke SUBMITTED",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R4: transisi ke RECHECK",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R4: transisi ke SUBMITTED",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R4: transisi ke APPROVED",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R6: APPROVED final",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R4: APPROVED ke DRAFT ditolak",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R7/E8: 4 audit status berurut",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R1: vehicle tidak ada",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R1: point dan condition invalid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R2: ENGINE tanpa kunci",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R3: NOT_INSPECTABLE tanpa note",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "R3: MAJOR_DAMAGE tanpa foto",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "S1: CREATED version 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "S2: DUPLICATE",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "S2: tanpa audit ganda",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "S3: UPDATED version 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "S4: CONFLICT mencakup server_status/version",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Sync SUBMITTED lengkap berhasil",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Sync server SUBMITTED terkunci",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "S5: REJECTED lalu CREATED dalam urutan request",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Sync tanpa inspections: 400",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "E5: filter, meta, urutan updated_at",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "E5: default page 1 limit 10",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "E5 invalid limit=101",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "E5 invalid page=0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "E5 invalid page=bad",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "E5 invalid status=BAD",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "passed": 34,
+  "failed": 0,
+  "sample_audit_response": {
+    "success": true,
+    "message": "Audit retrieved successfully",
+    "data": [
+      {
+        "action": "TRANSITION",
+        "actor": "audit",
+        "at": "2026-10-30T08:46:43.452832519Z",
+        "from_status": "DRAFT",
+        "inspection_id": 1,
+        "meta": {
+          "note": "contract probe",
+          "version": 5
+        },
+        "to_status": "SUBMITTED"
+      },
+      {
+        "action": "TRANSITION",
+        "actor": "audit",
+        "at": "2026-10-30T08:46:43.498146247Z",
+        "from_status": "SUBMITTED",
+        "inspection_id": 1,
+        "meta": {
+          "note": "contract probe",
+          "version": 6
+        },
+        "to_status": "RECHECK"
+      },
+      {
+        "action": "TRANSITION",
+        "actor": "audit",
+        "at": "2026-10-30T08:46:43.640014454Z",
+        "from_status": "RECHECK",
+        "inspection_id": 1,
+        "meta": {
+          "note": "contract probe",
+          "version": 7
+        },
+        "to_status": "SUBMITTED"
+      },
+      {
+        "action": "TRANSITION",
+        "actor": "audit",
+        "at": "2026-10-30T08:46:43.695359710Z",
+        "from_status": "SUBMITTED",
+        "inspection_id": 1,
+        "meta": {
+          "note": "contract probe",
+          "version": 8
+        },
+        "to_status": "APPROVED"
+      }
+    ]
+  }
+}

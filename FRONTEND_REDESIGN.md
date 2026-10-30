@@ -93,15 +93,17 @@ Service worker produksi hanya precache application shell, JS/CSS dan ikon. Runti
 
 Update memakai prompt: notifikasi persisten dan Dialog, diblokir jika form masih dirty. Reload terjadi hanya setelah pengguna menyetujui dan controller baru aktif. Aktivasi worker dari tab lain tidak otomatis me-reload tab yang memiliki input. Regenerasi SW nyata, waiting/activation, controller change dan reload diuji dalam browser; file SW hasil build yang dimodifikasi sementara saat tes selalu dipulihkan.
 
-PWA diuji melalui build/preview pada localhost:5173. SW tidak diaktifkan di dev server. Di hosting nyata diperlukan HTTPS dan SPA fallback ke index.html. Kriteria teknis installability diuji; pemasangan melalui antarmuka OS Android/iOS belum diuji.
+PWA diuji melalui build/preview pada localhost:5173. SW tidak diaktifkan di dev server. Suite Playwright kini menyiapkan build dan preview produksi otomatis di port 5173; backend harus tetap berjalan. Di hosting nyata diperlukan HTTPS dan SPA fallback ke index.html. Kriteria teknis installability diuji; pemasangan melalui antarmuka OS Android/iOS belum diuji.
 
 ## 9. Draft offline dan E7 sync
 
-**Belum diaktifkan:** IndexedDB draft, UUID lokal, base_version offline, outbox lokal dan sync E7 S1–S5. Saat offline, isi form yang sedang terbuka tetap berada di memori, tombol simpan/submit nonaktif, dan kembali online tidak mengirim data otomatis. Reload/menutup halaman tidak mempertahankan draft lokal; ini dijelaskan di antarmuka.
+Draft dan submit offline disimpan ke IndexedDB `logique-offline` setelah pengguna menekan tombol simpan/submit. UUID dan base_version dipertahankan untuk sinkronisasi E7 otomatis saat aplikasi terbuka dan jaringan tersedia. Perubahan yang belum disimpan tetap hanya di memori. Data kendaraan dan inspeksi yang pernah dibuka disimpan untuk pemulihan offline.
 
-Penundaan ini disengaja agar PWA dasar tidak mengganggu kontrak. Inspeksi yang dibuat melalui E2 dapat memiliki client_id null; memberikan UUID baru lalu mengirim ke E7 dapat membuat inspeksi ganda. Pengembangan berikutnya perlu membedakan record E2 dan record dengan identitas E7, mempertahankan UUID dan base_version, serta membuktikan CREATED/UPDATED/DUPLICATE/CONFLICT/REJECTED dan recovery sebelum menghapus draft lokal. Backend E7 yang sudah ada tidak diubah.
+E2 kini memberi UUID saat create; migrasi V3/V4 mengisi UUID inspeksi lama. Retry memakai UUID dan payload yang sama. CREATED/UPDATED/DUPLICATE menandai antrean sebagai synced; CONFLICT/REJECTED mempertahankan data lokal dan menampilkan kesalahan untuk ditinjau. Antrean tidak dihapus ketika jaringan atau server gagal. Web Locks menserialkan simpan/sync lintas tab pada browser yang mendukungnya. Sinkronisasi dilanjutkan saat aplikasi dibuka kembali; tidak berjalan saat aplikasi tertutup.
 
-## 10. Hasil pengujian
+## 10. Hasil pengujian historis redesign
+
+Tabel berikut mencatat sesi redesign 28 Oktober. Hasil snapshot terbaru dicatat di [STATUS_TECHNICAL_TEST.md](STATUS_TECHNICAL_TEST.md) dan `evidence/verification/`.
 
 | Pemeriksaan | Hasil akhir |
 |---|---|
@@ -120,38 +122,47 @@ Bukti aktual berada di [evidence/redesign](evidence/redesign/README.md). Browser
 
 ## 11. File yang berubah
 
-Daftar lengkap: [changed-files.txt](evidence/redesign/changed-files.txt). Perubahan inti ada pada frontend; backend tidak berubah. README, SUBMISSION, implementation plan dan laporan ini diperbarui untuk menunjuk hasil baru tanpa menghapus bukti historis.
+Daftar lengkap: [changed-files.txt](evidence/redesign/changed-files.txt). Pada sesi redesign awal, perubahan inti ada pada frontend dan backend belum berubah. Pembaruan 30 Oktober juga mencakup UUID E2, migrasi V4, dan schema OpenAPI audit. README, SUBMISSION, implementation plan dan laporan ini diperbarui untuk menunjuk hasil baru tanpa menghapus bukti historis.
 
 ## 12. Git
 
-Commit dipisah menurut implementasi adaptive form, perbaikan aksesibilitas keyboard, PWA dan dokumentasi/bukti. Daftar hash aktual dicatat pada [git-commits.txt](evidence/redesign/git-commits.txt) dan laporan akhir. Tag publik `v1.0-submission` tetap menunjuk snapshot awal; redesign diterbitkan melalui branch main tanpa force-push atau penulisan ulang tag.
+Commit dipisah menurut implementasi adaptive form, perbaikan aksesibilitas keyboard, PWA dan dokumentasi/bukti. Daftar hash aktual dicatat pada [git-commits.txt](evidence/redesign/git-commits.txt) dan laporan akhir. Tag publik `v1.0-submission` digunakan untuk snapshot pengumpulan final setelah verifikasi. Snapshot awal dipertahankan pada tag arsip `v1.0-submission-initial`; branch main tidak ditulis ulang.
 
 ## 13. Belum selesai dan catatan dependensi
 
-- Draft IndexedDB dan offline E7 sync ditunda dengan alasan konsistensi identitas/version di atas.
+- Perubahan form perlu disimpan secara eksplisit; sinkronisasi offline berjalan selama aplikasi terbuka.
 - Instalasi OS, keyboard virtual perangkat fisik dan pengujian lintas browser belum dilakukan; viewport, touch dan lifecycle SW diuji melalui Chromium automation.
 - npm audit runtime (`--omit=dev`) tidak menemukan kerentanan. Audit lengkap masih melaporkan 4 temuan low pada rantai build Workbox/deepmerge; versi patched deepmerge belum tersedia saat verifikasi. Temuan critical/moderate pada tool tes awal ditangani dengan upgrade Vitest ke 5.0.5 yang kompatibel dengan Vite/Node yang digunakan. Tidak dilakukan downgrade paksa plugin PWA atau klaim seluruh dependency bebas advisory.
 - Benchmark backend tetap hasil sesi awal; tidak ada klaim angka performa frontend yang belum diukur. Bundle dipecah untuk route dan workbox; ukuran aktual tercantum pada build.log.
 
 ## Menjalankan
 
+Backend dan database mengikuti [README](README.md). Untuk frontend:
+
 ```bash
-# Node 22.12 LTS / 24 LTS sesuai engines
 cd frontend
 npm install
-npm run dev                         # localhost:5173
-npm run build
+npm run dev                         # localhost:5173; Ctrl+C sebelum tes browser
+```
+
+Dengan backend tetap berjalan dan port frontend 5173 tersedia:
+
+```bash
 npm run test
 npm run lint
-# Jalankan preview ketika port 5173 tidak sedang dipakai dev server:
-npm run preview -- --port 5173 --strictPort
-# Di terminal lain, dengan backend 8080 dan preview berjalan:
-npm run test:e2e
+npx playwright install chromium
+npm run test:e2e                     # build + preview produksi otomatis, seluruh suite
+# Subset opsional, dijalankan sendiri-sendiri:
+npm run test:offline
 npm run test:pwa
 ```
 
-Preview menggunakan port 5173 agar sesuai CORS backend default, sehingga tidak perlu mengubah backend. VITE_API_URL mengikuti .env.example. Jangan menjalankan build secara bersamaan dengan tes update PWA, karena tes tersebut sementara mengubah generated dist/sw.js dan memulihkannya di finally.
+Untuk mencoba PWA secara manual: `npm run build` lalu `npm run preview -- --port 5173 --strictPort`. `VITE_API_URL` mengikuti `.env.example`. Jangan menjalankan build bersamaan dengan tes update PWA, karena tes sementara mengubah `dist/sw.js` dan memulihkannya di `finally`. Preview untuk tes dijalankan dan dihentikan oleh Playwright; tidak perlu terminal frontend kedua.
 
 ## Referensi teknis dan AI
 
 Implementasi mengikuti [shadcn Tailwind 4/React 19](https://ui.shadcn.com/docs/tailwind-v4), [RHF setFocus](https://react-hook-form.com/docs/useform/setfocus), [Vite PWA prompt untuk aplikasi form](https://vite-pwa-org.netlify.app/guide/auto-update), dan [migrasi Vitest](https://vitest.dev/guide/migration/). Kodifikasi dan pengujian sesi ini dibantu OpenAI Codex. Contoh koreksi nyata: override tabIndex awal membuat RadioGroup terlewati oleh Tab; tes urutan Tab nyata menemukan masalah tersebut, lalu override dihapus. Kandidat tetap perlu memahami dan meninjau hasil sebelum submission.
+
+## Pembaruan verifikasi 30 Oktober 2026
+
+Tes browser default kini mencakup form online, PWA, antrean offline dengan API simulasi, serta integrasi backend nyata. `npm run test:e2e` menyiapkan build/preview produksi otomatis; `npm run test:offline` dan `npm run test:pwa` menjalankan subset. Hasil yang berlaku untuk snapshot terbaru ada di [STATUS_TECHNICAL_TEST.md](STATUS_TECHNICAL_TEST.md); angka dan screenshot redesign sebelumnya tetap historis.

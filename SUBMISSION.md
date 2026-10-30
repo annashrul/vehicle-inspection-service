@@ -2,11 +2,11 @@
 
 | Item | Isi |
 |---|---|
-| Nama kandidat | annashrul (identitas Git/GitHub yang tersedia) |
+| Nama kandidat | annashrul yusuf |
 | URL repository | https://github.com/annashrul/vehicle-inspection-service |
 | Tag final | `v1.0-submission` |
-| Tanggal selesai | 28 Oktober 2026 |
-| Total jam kerja | Sesi lanjutan sekitar 1 jam 10 menit (mulai sekitar 14:35 WIB); durasi pengerjaan sebelumnya tidak tersedia, sehingga total keseluruhan tidak diklaim. |
+| Tanggal selesai | 30 Oktober 2026 (pembaruan dan verifikasi terakhir) |
+| Total waktu pengerjaan | 2 hari, dikonfirmasi kandidat; jam kerja efektif tidak dirinci dan tidak diasumsikan 48 jam. |
 
 ## 1. Cara verifikasi
 
@@ -20,7 +20,7 @@
 | Seed 50.000 | `python3 scripts/seed_via_api.py --count 50000` |
 | Frontend | `cd frontend && npm install && npm run dev` — http://localhost:5173/inspections/new |
 | Build frontend | `cd frontend && npm run build` |
-| Tes browser | Backend + Vite berjalan, `cd frontend && npx playwright install chromium && npx playwright test` |
+| Tes browser | Backend berjalan, hentikan server frontend port 5173, lalu `cd frontend && npx playwright install chromium && npm run test:e2e`; build/preview otomatis |
 | Benchmark | `python3 scripts/benchmark.py before` / `after`; lihat README untuk baseline database baru |
 
 Detail konfigurasi, asumsi, arsitektur dan reproduksi: [README.md](README.md). Bukti command/tes: [evidence](evidence/README.md).
@@ -50,9 +50,9 @@ Detail konfigurasi, asumsi, arsitektur dan reproduksi: [README.md](README.md). B
 | S4 CONFLICT | Selesai | Stale atau status server final/submitted |
 | S5 partial failure | Selesai | REJECTED tetap memproses item valid lainnya |
 | Health PostgreSQL dan MongoDB | Selesai | Readiness keduanya UP |
-| Migrasi database dan index | Selesai | V1/V2 pada database kosong lulus; V2 dan index diuji |
-| Tes otomatis minimal 4 | Selesai | 10 tes backend final lulus; 9 tes pada database kosong juga lulus |
-| Frontend form inspeksi | Selesai | 4 tes browser: dua viewport, pesan error API, retry koneksi awal |
+| Migrasi database dan index | Selesai | V1 skema/seed, V2 indeks, V3/V4 backfill UUID untuk inspeksi lama; E2 baru memberi UUID langsung |
+| Tes otomatis minimal 4 | Selesai | Mencakup aturan, idempotensi/konflik, dan kesesuaian schema OpenAPI; hasil terbaru di STATUS_TECHNICAL_TEST.md |
+| Frontend form inspeksi | Selesai | Form online, validasi, responsif, PWA, antrean offline dan integrasi E7; hasil terbaru di STATUS_TECHNICAL_TEST.md |
 | Bonus | Tidak | Prioritas pada persyaratan wajib; tidak ada bonus yang diklaim. |
 
 ## 3. Performa sebelum dan sesudah
@@ -92,13 +92,13 @@ Sebelum/sesudah memakai container, image, waktu startup, database dan JVM yang s
 
 ## 6. Belum selesai atau keterbatasan
 
-- Seluruh E1–E8, R1–R7, S1–S5 telah diimplementasikan dan diverifikasi. Maven final: 10 tes lulus; browser: 4 tes lulus; build frontend berhasil.
+- Seluruh E1–E8, R1–R7, S1–S5 diimplementasikan. Hasil pengujian awal (10 tes backend dan 4 browser) bersifat historis; hasil snapshot terbaru ada di [STATUS_TECHNICAL_TEST.md](STATUS_TECHNICAL_TEST.md).
 - Simulasi MongoDB berhenti membuktikan readiness 503/DOWN, sync tetap CREATED dengan 1 outbox pending, dan audit muncul sekali setelah pemulihan. PostgreSQL/MongoDB kembali UP.
 - Snapshot akhir sesi backend sebelum redesign: 50.010 inspeksi, 700.126 item, 50.010 event audit PostgreSQL dan MongoDB, 50.000 audit seed-script, outbox pending 0. Data tambahan pengujian dipertahankan.
 - Tail latency halaman 2000 belum membaik; keyset dan optimasi exact count belum dikerjakan.
-- Nama lengkap kandidat dan total jam pengerjaan sebelum sesi lanjutan tidak disediakan; identitas Git dipakai tanpa mengarang data.
+- Kandidat mengonfirmasi nama dan durasi 2 hari; tidak ada klaim jumlah jam efektif yang tidak diberikan.
 - Bonus tidak dikerjakan. Autentikasi, TLS deployment dan kebijakan retensi outbox tidak termasuk lingkup technical test ini.
-- Clone bersih pada mesin kedua belum diuji. Startup Compose dan migrasi pada database kosong lokal telah diuji.
+- Clone GitHub bersih dan database baru sudah diuji pada mesin lokal. Mesin fisik kedua belum diuji.
 
 ## 7. Deklarasi AI
 
@@ -108,10 +108,10 @@ Sebelum/sesudah memakai container, image, waktu startup, database dan JVM yang s
 - Contoh kesalahan AI: parsing otomatis query parameter ternyata menghasilkan 404 untuk page nonnumerik, terungkap oleh tes yang mengharapkan 400. Parsing eksplisit ditambahkan, lalu tes dijalankan ulang; schema OpenAPI juga diperiksa karena konfigurasi JSON runtime tidak otomatis menjamin nama schema snake_case.
 
 
-## Pembaruan frontend setelah submission awal
+## Pembaruan snapshot pengumpulan 30 Oktober 2026
 
-Redesign berada pada branch main; tag v1.0-submission dipertahankan sebagai snapshot awal. Backend, hasil seed dan benchmark di atas tidak diubah atau diuji ulang untuk mengklaim angka baru. Pengujian integrasi frontend memakai inspeksi sintetis baru dan mempertahankan seluruh data yang sudah ada.
+Snapshot terbaru menyertakan schema audit eksplisit pada OpenAPI, pemisahan kontrak POST/PUT, migrasi UUID V3/V4, integrasi offline IndexedDB dan suite browser produksi yang otomatis. Tag `v1.0-submission` digunakan untuk snapshot final setelah verifikasi; status tag dan commit dicatat pada laporan verifikasi.
 
-Frontend baru: RHF/Zod, shadcn/ui/Tailwind/Lucide, Accordion multi-open, partial draft, progress valid, navigasi/fokus error, conflict/read-only/error recovery, desktop/tablet/mobile dan PWA shell dengan update terkonfirmasi. Draft lokal IndexedDB/E7 offline belum diaktifkan; alasan dan batas keamanan/konsistensi dijelaskan pada [FRONTEND_REDESIGN.md](FRONTEND_REDESIGN.md).
+Frontend: RHF/Zod, shadcn/ui/Tailwind, validasi/fokus error, responsif, status read-only, conflict recovery, PWA, dan antrean IndexedDB. Simpan Draft/Submit diperlukan untuk persistensi; sync E7 berjalan saat aplikasi terbuka dan online. UUID tetap, base_version dan retry identik mencegah duplikasi. Konflik/penolakan mempertahankan data lokal. Draft belum disimpan tidak dipersist otomatis, dan sync tidak berjalan saat aplikasi tertutup.
 
-Verifikasi terbaru: build dan lint berhasil, 20 tes unit, 16 tes browser pada 10 viewport, dan 5 tes PWA lulus. Bukti berada di [evidence/redesign](evidence/redesign/README.md). Pengujian perangkat fisik, browser selain Chromium dan instalasi OS belum dilakukan. Audit runtime bersih; 4 temuan low pada dependency build masih dicatat secara eksplisit.
+[STATUS_TECHNICAL_TEST.md](STATUS_TECHNICAL_TEST.md) dan `evidence/verification/` menjadi rujukan hasil terbaru. Bukti seed, performa, dan redesign lama tetap historis; benchmark tidak diulang atau diklaim sebagai angka baru. Perangkat fisik dan browser selain Chromium belum diuji.
